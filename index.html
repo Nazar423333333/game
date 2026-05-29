@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🎮 SUPER GAME ВІД НАЗАРА</title>
+<title>🎮 SUPER GAME НАЗАРА</title>
 
 <style>
 
@@ -172,7 +172,7 @@ font-size:18px;
 
 <div id="score">⭐ Очки: 0</div>
 
-<div id="hearts">❤️❤️❤️</div>
+<div id="hearts"></div>
 
 <select id="level">
 <option value="50">😊 Легко</option>
@@ -230,7 +230,10 @@ min="1"
 let secret = 0;
 let max = 100;
 let attempts = 0;
-let lives = 3;
+
+/* 🔥 50 ЖИТТІВ */
+let lives = 50;
+
 let score = 0;
 let gameOver = false;
 
@@ -260,7 +263,10 @@ secret =
 Math.floor(Math.random()*max)+1;
 
 attempts = 0;
-lives = 8;
+
+/* 🔥 СТАРТ 50 ЖИТТІВ */
+lives = 50;
+
 gameOver = false;
 
 updateHearts();
@@ -503,4 +509,3 @@ newGame();
 
 </body>
 </html>
-```
