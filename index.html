@@ -4,22 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🎮 ІГРА НАЗАРА!!!!</title>
+<title>🎮 SUPER GAME НАЗАРА</title>
 
 <style>
+
 body{
+margin:0;
+font-family:Arial;
 background:linear-gradient(-45deg,#020024,#090979,#000,#3a0ca3);
 background-size:400% 400%;
-animation:bgMove 10s ease infinite;
+animation:bg 8s ease infinite;
 color:white;
-font-family:Arial;
 text-align:center;
 min-height:100vh;
-margin:0;
 overflow:hidden;
 }
 
-@keyframes bgMove{
+@keyframes bg{
 0%{background-position:0% 50%;}
 50%{background-position:100% 50%;}
 100%{background-position:0% 50%;}
@@ -27,50 +28,86 @@ overflow:hidden;
 
 h1{
 font-size:55px;
-text-shadow:0 0 20px lime;
 margin-top:20px;
+text-shadow:0 0 20px lime;
+}
+
+.panel{
+background:rgba(255,255,255,0.08);
+padding:20px;
+width:90%;
+max-width:500px;
+margin:auto;
+border-radius:25px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 25px rgba(0,255,0,0.4);
 }
 
 input,button,select{
-padding:12px;
+padding:14px;
 font-size:20px;
-margin:6px;
+margin:8px;
 border:none;
-border-radius:12px;
+border-radius:15px;
 }
 
 button{
 background:lime;
 cursor:pointer;
 font-weight:bold;
-animation:rgb 3s linear infinite;
+transition:0.3s;
 }
 
-@keyframes rgb{
-0%{filter:hue-rotate(0deg);}
-100%{filter:hue-rotate(360deg);}
+button:hover{
+transform:scale(1.08);
+box-shadow:0 0 20px lime;
 }
 
 #result{
-font-size:32px;
+font-size:30px;
 margin-top:20px;
 min-height:80px;
 }
 
 #bar{
-width:320px;
-height:22px;
+width:100%;
+height:24px;
 background:#222;
-margin:20px auto;
 border-radius:20px;
 overflow:hidden;
+margin-top:20px;
 }
 
 #fill{
 height:100%;
 width:0%;
-background:lime;
+background:linear-gradient(
+90deg,
+red,
+orange,
+yellow,
+lime,
+cyan,
+blue,
+purple
+);
+
+background-size:400% 400%;
+animation:rgb 3s linear infinite;
 transition:0.3s;
+}
+
+@keyframes rgb{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
+}
+
+#timer,
+#score,
+#hearts,
+#leaderboard{
+font-size:24px;
+margin-top:10px;
 }
 
 .win{
@@ -83,24 +120,59 @@ animation:win 1s infinite;
 100%{transform:scale(1);}
 }
 
-.matrix{
-background:black;
-color:lime;
+.shake{
+animation:shake 0.4s;
 }
 
-#leaderboard{
-margin-top:20px;
-font-size:22px;
-color:gold;
+@keyframes shake{
+0%{transform:translateX(0);}
+25%{transform:translateX(-10px);}
+50%{transform:translateX(10px);}
+75%{transform:translateX(-10px);}
+100%{transform:translateX(0);}
 }
+
+#shop{
+margin-top:30px;
+padding:20px;
+background:rgba(255,255,255,0.08);
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,255,255,0.4);
+}
+
+#shop h2{
+font-size:32px;
+color:cyan;
+text-shadow:0 0 15px cyan;
+}
+
+@media(max-width:600px){
+
+h1{
+font-size:36px;
+}
+
+input,button,select{
+width:90%;
+font-size:18px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>🎮 ІГРА НАЗАРА!!!!</h1>
+<h1>🎮 SUPER GAME НАЗАРА</h1>
+
+<div class="panel">
 
 <div id="timer">⏳ 0 сек</div>
+
+<div id="score">⭐ Очки: 0</div>
+
+<div id="hearts">❤️❤️❤️</div>
 
 <select id="level">
 <option value="50">😊 Легко</option>
@@ -112,59 +184,86 @@ color:gold;
 
 <br>
 
-<input type="text" id="nickname" placeholder="Твій нік">
+<input
+type="number"
+id="guess"
+placeholder="Введи число"
+min="1"
+>
 
 <br>
 
-<input type="number" id="guess" placeholder="Введи число" min="1">
+<button onclick="checkGame()">
+🎯 Перевірити
+</button>
 
-<button onclick="checkGame()">Перевірити</button>
-<button onclick="newGame()">Нова гра</button>
-<button onclick="toggleMusic()">🎵 MUSIC</button>
+<button onclick="newGame()">
+🔄 Нова гра
+</button>
 
 <div id="result"></div>
 
-<div id="bar"><div id="fill"></div></div>
+<div id="bar">
+<div id="fill"></div>
+</div>
 
 <div id="leaderboard"></div>
 
-<audio id="winSound">
-<source src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3">
-</audio>
+<div id="shop">
 
-<audio id="failSound">
-<source src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-changing-tab-206.wav">
-</audio>
+<h2>🛒 МАГАЗИН</h2>
 
-<audio id="bgMusic" loop>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
+<button onclick="buyLife()">
+❤️ Купити життя (50)
+</button>
+
+<button onclick="buyHint()">
+💡 Підказка (30)
+</button>
+
+</div>
+
+</div>
 
 <script>
+
 let secret = 0;
-let attempts = 0;
 let max = 100;
-let startTime = 0;
-let timerInterval;
+let attempts = 0;
+let lives = 3;
+let score = 0;
 let gameOver = false;
-let musicStarted = false;
 
-function toggleMusic(){
-let music = document.getElementById("bgMusic");
+let startTime;
+let timerInterval;
 
-if(music.paused){
-music.play();
-} else {
-music.pause();
+function updateHearts(){
+
+document.getElementById("hearts").innerHTML =
+"❤️".repeat(lives);
+
 }
+
+function updateScore(){
+
+document.getElementById("score").innerHTML =
+`⭐ Очки: ${score}`;
+
 }
 
 function newGame(){
 
-max = Number(document.getElementById("level").value);
-secret = Math.floor(Math.random()*max)+1;
+max =
+Number(document.getElementById("level").value);
+
+secret =
+Math.floor(Math.random()*max)+1;
+
 attempts = 0;
+lives = 8;
 gameOver = false;
+
+updateHearts();
 
 startTime = Date.now();
 
@@ -174,76 +273,234 @@ document.getElementById("fill").style.width="0%";
 clearInterval(timerInterval);
 
 timerInterval = setInterval(()=>{
-let sec = Math.floor((Date.now()-startTime)/1000);
-document.getElementById("timer").innerHTML = `⏳ ${sec} сек`;
+
+let sec =
+Math.floor((Date.now()-startTime)/1000);
+
+document.getElementById("timer").innerHTML =
+`⏳ ${sec} сек`;
+
 },1000);
+
 }
 
 function updateBar(value){
-document.getElementById("fill").style.width = value + "%";
+
+document.getElementById("fill").style.width =
+value + "%";
+
+}
+
+function shake(){
+
+document.body.classList.add("shake");
+
+setTimeout(()=>{
+
+document.body.classList.remove("shake");
+
+},400);
+
+}
+
+function saveRecord(time){
+
+let best =
+localStorage.getItem("bestTime");
+
+if(!best || time < best){
+
+localStorage.setItem("bestTime",time);
+
+document.getElementById("leaderboard").innerHTML =
+`🏆 Новий рекорд: ${time} сек`;
+
+}else{
+
+document.getElementById("leaderboard").innerHTML =
+`🏆 Рекорд: ${best} сек`;
+
+}
+
+}
+
+function buyLife(){
+
+if(score >= 50){
+
+score -= 50;
+
+lives++;
+
+updateScore();
+updateHearts();
+
+document.getElementById("result").innerHTML =
+"❤️ Куплено життя!";
+
+}else{
+
+document.getElementById("result").innerHTML =
+"❌ Мало очок";
+
+}
+
+}
+
+function buyHint(){
+
+if(score >= 30){
+
+score -= 30;
+
+updateScore();
+
+if(secret % 2 === 0){
+
+document.getElementById("result").innerHTML =
+"💡 Число парне";
+
+}else{
+
+document.getElementById("result").innerHTML =
+"💡 Число непарне";
+
+}
+
+}else{
+
+document.getElementById("result").innerHTML =
+"❌ Мало очок";
+
+}
+
 }
 
 function checkGame(){
 
 if(gameOver) return;
 
-let user = Number(document.getElementById("guess").value);
-let result = document.getElementById("result");
+let user =
+Number(document.getElementById("guess").value);
+
+let result =
+document.getElementById("result");
 
 if(!user || user < 1){
-result.innerHTML = "⚠️ Введи число";
+
+result.innerHTML =
+"⚠️ Введи число";
+
 return;
+
 }
 
 attempts++;
 
-if(attempts >= 15){
-result.innerHTML = "💀 GAME OVER";
-gameOver = true;
-clearInterval(timerInterval);
-return;
-}
+let diff =
+Math.abs(secret-user);
 
-let diff = Math.abs(secret - user);
-let progress = Math.max(0, 100 - (diff/max*100));
+let progress =
+Math.max(0,100-(diff/max*100));
+
 updateBar(progress);
 
 if(user === secret){
 
-let time = Math.floor((Date.now()-startTime)/1000);
+let time =
+Math.floor((Date.now()-startTime)/1000);
 
-document.getElementById("winSound").play();
+score += 100;
+
+updateScore();
 
 result.innerHTML =
-`🔥 ПЕРЕМОГА<br>🎯 ${secret}<br>🧠 ${attempts} спроб<br>⏳ ${time} сек`;
+
+`🔥 ПЕРЕМОГА
+<br>🎯 ${secret}
+<br>🧠 ${attempts} спроб
+<br>⏳ ${time} сек`;
 
 result.classList.add("win");
 
+saveRecord(time);
+
 clearInterval(timerInterval);
+
 gameOver = true;
+
 return;
+
 }
 
-document.getElementById("failSound").play();
+shake();
 
-if(diff <= 5) result.innerHTML = "🔥 Дуже гаряче!";
-else if(diff <= 15) result.innerHTML = "🌡️ Близько!";
-else result.innerHTML = "❄️ Далеко!";
+lives--;
 
-if(user > secret) result.innerHTML += " ⬇️ Менше";
-else result.innerHTML += " ⬆️ Більше";
+updateHearts();
+
+if(lives <= 0){
+
+result.innerHTML =
+
+`💀 GAME OVER
+<br>Число було: ${secret}`;
+
+clearInterval(timerInterval);
+
+gameOver = true;
+
+return;
+
 }
 
-document.getElementById("guess").addEventListener("keydown", e=>{
-if(e.key === "Enter") checkGame();
+if(diff <= 5){
+
+result.innerHTML =
+"🔥 Дуже гаряче!";
+
+}else if(diff <= 15){
+
+result.innerHTML =
+"🌡️ Близько!";
+
+}else{
+
+result.innerHTML =
+"❄️ Далеко!";
+
+}
+
+if(user > secret){
+
+result.innerHTML +=
+" ⬇️ Менше";
+
+}else{
+
+result.innerHTML +=
+" ⬆️ Більше";
+
+}
+
+}
+
+document
+.getElementById("guess")
+.addEventListener("keydown",e=>{
+
+if(e.key==="Enter"){
+
+checkGame();
+
+}
+
 });
 
-setInterval(()=>{
-document.body.classList.toggle("matrix");
-},30000);
-
 newGame();
+
 </script>
 
 </body>
 </html>
+```
