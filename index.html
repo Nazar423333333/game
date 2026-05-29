@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>ULTRA MAX FINAL</title>
+
+<style>
+
+body{
+background:linear-gradient(-45deg,#020024,#090979,#000,#3a0ca3);
+background-size:400% 400%;
+animation:bgMove 10s ease infinite;
+color:white;
+font-family:Arial;
+text-align:center;
+min-height:100vh;
+margin:0;
+overflow:hidden;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+h1{
+font-size:55px;
+text-shadow:0 0 20px lime;
+margin-top:20px;
+}
+
+input,button,select{
+padding:12px;
+font-size:20px;
+margin:6px;
+border:none;
+border-radius:12px;
+}
+
+button{
+background:lime;
+cursor:pointer;
+font-weight:bold;
+animation:rgb 3s linear infinite;
+}
+
+@keyframes rgb{
+0%{filter:hue-rotate(0deg);}
+100%{filter:hue-rotate(360deg);}
+}
+
+#result{
+font-size:32px;
+margin-top:20px;
+min-height:80px;
+}
+
+#bar{
+width:320px;
+height:22px;
+background:#222;
+margin:20px auto;
+border-radius:20px;
+overflow:hidden;
+}
+
+#fill{
+height:100%;
+width:0%;
+background:lime;
+transition:0.3s;
+}
+
+.win{
+animation:win 1s infinite;
+}
+
+@keyframes win{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
+
+.matrix{
+background:black;
+color:lime;
+}
+
+#leaderboard{
+margin-top:20px;
+font-size:22px;
+color:gold;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🎮 ULTRA MAX FINAL</h1>
+
+<div id="timer">
+⏳ 0 сек
+</div>
+
+<select id="level">
+<option value="50">😊 Легко</option>
+<option value="100">😎 Середньо</option>
+<option value="500">🔥 Складно</option>
+<option value="1000">💀 Божевільно</option>
+<option value="10000">☠️ НЕМОЖЛИВО</option>
+</select>
+
+<br>
+
+<input type="text"
+id="nickname"
+placeholder="Твій нік">
+
+<br>
+
+<input type="number"
+id="guess"
+placeholder="Введи число"
+min="1">
+
+<button onclick="checkGame()">
+Перевірити
+</button>
+
+<button onclick="newGame()">
+Нова гра
+</button>
+
+<div id="result"></div>
+
+<div id="bar">
+<div id="fill"></div>
+</div>
+
+<div id="record"></div>
+
+<div id="xp"></div>
+<div id="coins"></div>
+<div id="rank"></div>
+<div id="stats"></div>
+
+<div id="leaderboard"></div>
+
+<audio id="winSound">
+<source src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3">
+</audio>
+
+<audio id="failSound">
+<source src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-changing-tab-206.wav">
+</audio>
+
+<script>
+
+let secret=0;
+let attempts=0;
+let max=100;
+let startTime=0;
+let timerInterval;
+
+let xp=
+Number(localStorage.getItem("xp"))||0;
+
+let coins=
+Number(localStorage.getItem("coins"))||0;
+
+let games=
+Number(localStorage.getItem("games"))||0;
+
+function updateProfile(){
+
+let rank="🙂 Новачок";
+
+if(xp>=1000){
+rank="👑 Легенда";
+}
+else if(xp>=500){
+rank="🔥 Майстер";
+}
+
+document.getElementById("xp")
+.innerHTML=`💎 XP: ${xp}`;
+
+document.getElementById("coins")
+.innerHTML=`🪙 Монети: ${coins}`;
+
+document.getElementById("rank")
+.innerHTML=`🎖️ Ранг: ${rank}`;
+
+document.getElementById("stats")
+.innerHTML=`🎮 Ігор: ${games}`;
+
+}
+
+function newGame(){
+
+max=
+Number(document.getElementById("level").value);
+
+secret=
+Math.floor(Math.random()*max)+1;
+
+attempts=0;
+
+startTime=Date.now();
+
+games++;
+
+localStorage.setItem("games",games);
+
+updateProfile();
+
+document.getElementById("result")
+.innerHTML="";
+
+clearInterval(timerInterval);
+
+timerInterval=setInterval(()=>{
+
+let sec=
+Math.floor((Date.now()-startTime)/1000);
+
+document.getElementById("timer")
+.innerHTML=`⏳ ${sec} сек`;
+
+},1000);
+
+}
+
+function updateBar(value){
+
+document.getElementById("fill")
+.style.width=value+"%";
+
+}
+
+function createParticles(){
+
+for(let i=0;i<40;i++){
+
+let p=
+document.createElement("div");
+
+p.style.position="absolute";
+p.style.width="10px";
+p.style.height="10px";
+p.style.borderRadius="50%";
+
+let colors=[
+"lime",
+"cyan",
+"yellow",
+"magenta"
+];
+
+p.style.background=
+colors[Math.floor(Math.random()*4)];
+
+p.style.left=
+Math.random()*window.innerWidth+"px";
+
+p.style.top=
+Math.random()*window.innerHeight+"px";
+
+document.body.appendChild(p);
+
+setTimeout(()=>{
+
+p.style.transform=
+"translateY(-100px) scale(0)";
+
+p.style.opacity="0";
+
+},50);
+
+setTimeout(()=>{
+p.remove();
+},1000);
+
+}
+
+}
+
+function updateLeaderboard(){
+
+let nickname=
+document.getElementById("nickname").value
+||"Гравець";
+
+let leaderboard=
+JSON.parse(localStorage.getItem("leaders"))
+||[];
+
+leaderboard.push({
+name:nickname,
+attempts:attempts
+});
+
+leaderboard.sort((a,b)=>
+a.attempts-b.attempts);
+
+leaderboard=
+leaderboard.slice(0,5);
+
+localStorage.setItem(
+"leaders",
+JSON.stringify(leaderboard)
+);
+
+document.getElementById("leaderboard")
+.innerHTML=
+"🏆 ТОП ГРАВЦІВ<br><br>"+
+leaderboard.map(player=>
+`${player.name} — ${player.attempts}`
+).join("<br>");
+
+}
+
+function checkGame(){
+
+let user=
+Number(document.getElementById("guess").value);
+
+let result=
+document.getElementById("result");
+
+if(!user||user<1){
+
+result.innerHTML=
+"⚠️ Введи число";
+
+return;
+
+}
+
+attempts++;
+
+if(attempts>=15){
+
+result.innerHTML=
+"💀 GAME OVER";
+
+clearInterval(timerInterval);
+
+navigator.vibrate(200);
+
+return;
+
+}
+
+let diff=
+Math.abs(secret-user);
+
+let progress=
+Math.max(0,100-(diff/max*100));
+
+updateBar(progress);
+
+if(user===1337){
+
+result.innerHTML=
+"😈 CHEAT MODE";
+
+}
+
+if(user===secret){
+
+let time=
+Math.floor((Date.now()-startTime)/1000);
+
+document.getElementById("winSound")
+.play();
+
+navigator.vibrate(300);
+
+result.innerHTML=
+`🔥 ПЕРЕМОГА<br>
+🎯 ${secret}<br>
+🧠 ${attempts} спроб<br>
+⏳ ${time} сек`;
+
+result.classList.add("win");
+
+xp+=10;
+coins+=5;
+
+localStorage.setItem("xp",xp);
+localStorage.setItem("coins",coins);
+
+updateProfile();
+
+updateLeaderboard();
+
+clearInterval(timerInterval);
+
+createParticles();
+
+return;
+
+}
+
+document.getElementById("failSound")
+.play();
+
+navigator.vibrate(100);
+
+if(diff<=5){
+
+result.innerHTML=
+"🔥 Дуже гаряче!";
+
+}
+else if(diff<=15){
+
+result.innerHTML=
+"🌡️ Близько!";
+
+}
+else{
+
+result.innerHTML=
+"❄️ Далеко!";
+
+}
+
+if(user>secret){
+
+result.innerHTML+=" ⬇️ Менше";
+
+}
+else{
+
+result.innerHTML+=" ⬆️ Більше";
+
+}
+
+if(secret%2===0){
+
+result.innerHTML+=
+"<br>🤖 Парне";
+
+}
+else{
+
+result.innerHTML+=
+"<br>🤖 Непарне";
+
+}
+
+}
+
+document.getElementById("guess")
+.addEventListener("keydown",e=>{
+
+if(e.key==="Enter"){
+checkGame();
+}
+
+});
+
+setInterval(()=>{
+
+document.body.classList.toggle("matrix");
+
+},30000);
+
+setInterval(()=>{
+
+let snow=
+document.createElement("div");
+
+snow.innerHTML="❄";
+
+snow.style.position="fixed";
+
+snow.style.left=
+Math.random()*100+"vw";
+
+snow.style.top="-20px";
+
+snow.style.fontSize="20px";
+
+snow.style.transition="5s linear";
+
+document.body.appendChild(snow);
+
+setTimeout(()=>{
+
+snow.style.top="110vh";
+
+},50);
+
+setTimeout(()=>{
+snow.remove();
+},5000);
+
+},300);
+
+updateProfile();
+
+newGame();
+
+</script>
+
+</body>
+</html>
+```
