@@ -2,13 +2,11 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>🎮 ІГРА НАЗАРА!!!!</title>
 
 <style>
-
 body{
 background:linear-gradient(-45deg,#020024,#090979,#000,#3a0ca3);
 background-size:400% 400%;
@@ -95,7 +93,6 @@ margin-top:20px;
 font-size:22px;
 color:gold;
 }
-
 </style>
 </head>
 
@@ -103,9 +100,7 @@ color:gold;
 
 <h1>🎮 ІГРА НАЗАРА!!!!</h1>
 
-<div id="timer">
-⏳ 0 сек
-</div>
+<div id="timer">⏳ 0 сек</div>
 
 <select id="level">
 <option value="50">😊 Легко</option>
@@ -117,37 +112,19 @@ color:gold;
 
 <br>
 
-<input type="text"
-id="nickname"
-placeholder="Твій нік">
+<input type="text" id="nickname" placeholder="Твій нік">
 
 <br>
 
-<input type="number"
-id="guess"
-placeholder="Введи число"
-min="1">
+<input type="number" id="guess" placeholder="Введи число" min="1">
 
-<button onclick="checkGame()">
-Перевірити
-</button>
-
-<button onclick="newGame()">
-Нова гра
-</button>
+<button onclick="checkGame()">Перевірити</button>
+<button onclick="newGame()">Нова гра</button>
+<button onclick="toggleMusic()">🎵 MUSIC</button>
 
 <div id="result"></div>
 
-<div id="bar">
-<div id="fill"></div>
-</div>
-
-<div id="record"></div>
-
-<div id="xp"></div>
-<div id="coins"></div>
-<div id="rank"></div>
-<div id="stats"></div>
+<div id="bar"><div id="fill"></div></div>
 
 <div id="leaderboard"></div>
 
@@ -159,358 +136,114 @@ min="1">
 <source src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-changing-tab-206.wav">
 </audio>
 
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-
-let secret=0;
-let attempts=0;
-let max=100;
-let startTime=0;
+let secret = 0;
+let attempts = 0;
+let max = 100;
+let startTime = 0;
 let timerInterval;
+let gameOver = false;
+let musicStarted = false;
 
-let xp=
-Number(localStorage.getItem("xp"))||0;
+function toggleMusic(){
+let music = document.getElementById("bgMusic");
 
-let coins=
-Number(localStorage.getItem("coins"))||0;
-
-let games=
-Number(localStorage.getItem("games"))||0;
-
-function updateProfile(){
-
-let rank="🙂 Новачок";
-
-if(xp>=1000){
-rank="👑 Легенда";
+if(music.paused){
+music.play();
+} else {
+music.pause();
 }
-else if(xp>=500){
-rank="🔥 Майстер";
-}
-
-document.getElementById("xp")
-.innerHTML=`💎 XP: ${xp}`;
-
-document.getElementById("coins")
-.innerHTML=`🪙 Монети: ${coins}`;
-
-document.getElementById("rank")
-.innerHTML=`🎖️ Ранг: ${rank}`;
-
-document.getElementById("stats")
-.innerHTML=`🎮 Ігор: ${games}`;
-
 }
 
 function newGame(){
 
-max=
-Number(document.getElementById("level").value);
+max = Number(document.getElementById("level").value);
+secret = Math.floor(Math.random()*max)+1;
+attempts = 0;
+gameOver = false;
 
-secret=
-Math.floor(Math.random()*max)+1;
+startTime = Date.now();
 
-attempts=0;
-
-startTime=Date.now();
-
-games++;
-
-localStorage.setItem("games",games);
-
-updateProfile();
-
-document.getElementById("result")
-.innerHTML="";
+document.getElementById("result").innerHTML="";
+document.getElementById("fill").style.width="0%";
 
 clearInterval(timerInterval);
 
-timerInterval=setInterval(()=>{
-
-let sec=
-Math.floor((Date.now()-startTime)/1000);
-
-document.getElementById("timer")
-.innerHTML=`⏳ ${sec} сек`;
-
+timerInterval = setInterval(()=>{
+let sec = Math.floor((Date.now()-startTime)/1000);
+document.getElementById("timer").innerHTML = `⏳ ${sec} сек`;
 },1000);
-
 }
 
 function updateBar(value){
-
-document.getElementById("fill")
-.style.width=value+"%";
-
-}
-
-function createParticles(){
-
-for(let i=0;i<40;i++){
-
-let p=
-document.createElement("div");
-
-p.style.position="absolute";
-p.style.width="10px";
-p.style.height="10px";
-p.style.borderRadius="50%";
-
-let colors=[
-"lime",
-"cyan",
-"yellow",
-"magenta"
-];
-
-p.style.background=
-colors[Math.floor(Math.random()*4)];
-
-p.style.left=
-Math.random()*window.innerWidth+"px";
-
-p.style.top=
-Math.random()*window.innerHeight+"px";
-
-document.body.appendChild(p);
-
-setTimeout(()=>{
-
-p.style.transform=
-"translateY(-100px) scale(0)";
-
-p.style.opacity="0";
-
-},50);
-
-setTimeout(()=>{
-p.remove();
-},1000);
-
-}
-
-}
-
-function updateLeaderboard(){
-
-let nickname=
-document.getElementById("nickname").value
-||"Гравець";
-
-let leaderboard=
-JSON.parse(localStorage.getItem("leaders"))
-||[];
-
-leaderboard.push({
-name:nickname,
-attempts:attempts
-});
-
-leaderboard.sort((a,b)=>
-a.attempts-b.attempts);
-
-leaderboard=
-leaderboard.slice(0,5);
-
-localStorage.setItem(
-"leaders",
-JSON.stringify(leaderboard)
-);
-
-document.getElementById("leaderboard")
-.innerHTML=
-"🏆 ТОП ГРАВЦІВ<br><br>"+
-leaderboard.map(player=>
-`${player.name} — ${player.attempts}`
-).join("<br>");
-
+document.getElementById("fill").style.width = value + "%";
 }
 
 function checkGame(){
 
-let user=
-Number(document.getElementById("guess").value);
+if(gameOver) return;
 
-let result=
-document.getElementById("result");
+let user = Number(document.getElementById("guess").value);
+let result = document.getElementById("result");
 
-if(!user||user<1){
-
-result.innerHTML=
-"⚠️ Введи число";
-
+if(!user || user < 1){
+result.innerHTML = "⚠️ Введи число";
 return;
-
 }
 
 attempts++;
 
-if(attempts>=15){
-
-result.innerHTML=
-"💀 GAME OVER";
-
+if(attempts >= 15){
+result.innerHTML = "💀 GAME OVER";
+gameOver = true;
 clearInterval(timerInterval);
-
-navigator.vibrate(200);
-
 return;
-
 }
 
-let diff=
-Math.abs(secret-user);
-
-let progress=
-Math.max(0,100-(diff/max*100));
-
+let diff = Math.abs(secret - user);
+let progress = Math.max(0, 100 - (diff/max*100));
 updateBar(progress);
 
-if(user===1337){
+if(user === secret){
 
-result.innerHTML=
-"😈 CHEAT MODE";
+let time = Math.floor((Date.now()-startTime)/1000);
 
-}
+document.getElementById("winSound").play();
 
-if(user===secret){
-
-let time=
-Math.floor((Date.now()-startTime)/1000);
-
-document.getElementById("winSound")
-.play();
-
-navigator.vibrate(300);
-
-result.innerHTML=
-`🔥 ПЕРЕМОГА<br>
-🎯 ${secret}<br>
-🧠 ${attempts} спроб<br>
-⏳ ${time} сек`;
+result.innerHTML =
+`🔥 ПЕРЕМОГА<br>🎯 ${secret}<br>🧠 ${attempts} спроб<br>⏳ ${time} сек`;
 
 result.classList.add("win");
 
-xp+=10;
-coins+=5;
-
-localStorage.setItem("xp",xp);
-localStorage.setItem("coins",coins);
-
-updateProfile();
-
-updateLeaderboard();
-
 clearInterval(timerInterval);
-
-createParticles();
-
+gameOver = true;
 return;
-
 }
 
-document.getElementById("failSound")
-.play();
+document.getElementById("failSound").play();
 
-navigator.vibrate(100);
+if(diff <= 5) result.innerHTML = "🔥 Дуже гаряче!";
+else if(diff <= 15) result.innerHTML = "🌡️ Близько!";
+else result.innerHTML = "❄️ Далеко!";
 
-if(diff<=5){
-
-result.innerHTML=
-"🔥 Дуже гаряче!";
-
-}
-else if(diff<=15){
-
-result.innerHTML=
-"🌡️ Близько!";
-
-}
-else{
-
-result.innerHTML=
-"❄️ Далеко!";
-
+if(user > secret) result.innerHTML += " ⬇️ Менше";
+else result.innerHTML += " ⬆️ Більше";
 }
 
-if(user>secret){
-
-result.innerHTML+=" ⬇️ Менше";
-
-}
-else{
-
-result.innerHTML+=" ⬆️ Більше";
-
-}
-
-if(secret%2===0){
-
-result.innerHTML+=
-"<br>🤖 Парне";
-
-}
-else{
-
-result.innerHTML+=
-"<br>🤖 Непарне";
-
-}
-
-}
-
-document.getElementById("guess")
-.addEventListener("keydown",e=>{
-
-if(e.key==="Enter"){
-checkGame();
-}
-
+document.getElementById("guess").addEventListener("keydown", e=>{
+if(e.key === "Enter") checkGame();
 });
 
 setInterval(()=>{
-
 document.body.classList.toggle("matrix");
-
 },30000);
 
-setInterval(()=>{
-
-let snow=
-document.createElement("div");
-
-snow.innerHTML="❄";
-
-snow.style.position="fixed";
-
-snow.style.left=
-Math.random()*100+"vw";
-
-snow.style.top="-20px";
-
-snow.style.fontSize="20px";
-
-snow.style.transition="5s linear";
-
-document.body.appendChild(snow);
-
-setTimeout(()=>{
-
-snow.style.top="110vh";
-
-},50);
-
-setTimeout(()=>{
-snow.remove();
-},5000);
-
-},300);
-
-updateProfile();
-
 newGame();
-
 </script>
 
 </body>
 </html>
-```
