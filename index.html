@@ -530,12 +530,29 @@ function activateGodMode(){
 function deactivateGodMode(){
 
     godMode = false;
+        score= 0;
 
     document.getElementById("god").innerHTML =
     "👑 GOD MODE: OFF";
 
     newGame();
+function updateAchievements(){
+    document.getElementById("achievements").innerHTML =
+    "🏆 Досягнення: " + achievements;
+}
 
+function updateXPBar(){
+    let xpFill = document.getElementById("xpFill");
+    if(!xpFill) return;
+
+    xpFill.style.width =
+    (xp/(playerLevel*100)*100) + "%";
+}
+
+function saveProgress(){
+    localStorage.setItem("coins", coins);
+    localStorage.setItem("playerLevel", playerLevel);
+}
     document.getElementById("result").innerHTML =
     "❌ РЕЖИМ БОГА ВИМКНЕНО";
 }
