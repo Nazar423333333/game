@@ -10,14 +10,15 @@
 
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial,sans-serif;
 background:linear-gradient(-45deg,#020024,#090979,#000,#3a0ca3);
 background-size:400% 400%;
 animation:bg 8s ease infinite;
 color:white;
 text-align:center;
 min-height:100vh;
-overflow:hidden;
+overflow-y:auto;
+overflow-x:hidden;
 }
 
 @keyframes bg{
@@ -33,17 +34,22 @@ text-shadow:0 0 20px lime;
 }
 
 .panel{
-background:rgba(255,255,255,0.08);
+background:rgba(255,255,255,.08);
 padding:20px;
 width:90%;
-max-width:500px;
-margin:auto;
+max-width:550px;
+margin:20px auto;
 border-radius:25px;
 backdrop-filter:blur(10px);
-box-shadow:0 0 25px rgba(0,255,0,0.4);
+box-shadow:0 0 25px rgba(0,255,0,.4);
+
+max-height:85vh;
+overflow-y:auto;
 }
 
-input,button,select{
+input,
+button,
+select{
 padding:14px;
 font-size:20px;
 margin:8px;
@@ -55,18 +61,18 @@ button{
 background:lime;
 cursor:pointer;
 font-weight:bold;
-transition:0.3s;
+transition:.3s;
 }
 
 button:hover{
-transform:scale(1.08);
+transform:scale(1.05);
 box-shadow:0 0 20px lime;
 }
 
 #result{
-font-size:30px;
+font-size:28px;
 margin-top:20px;
-min-height:80px;
+min-height:90px;
 }
 
 #bar{
@@ -91,10 +97,9 @@ cyan,
 blue,
 purple
 );
-
 background-size:400% 400%;
 animation:rgb 3s linear infinite;
-transition:0.3s;
+transition:.3s;
 }
 
 @keyframes rgb{
@@ -105,7 +110,10 @@ transition:0.3s;
 #timer,
 #score,
 #hearts,
-#leaderboard{
+#leaderboard,
+#god,
+#coins,
+#playerLevel{
 font-size:24px;
 margin-top:10px;
 }
@@ -121,7 +129,7 @@ animation:win 1s infinite;
 }
 
 .shake{
-animation:shake 0.4s;
+animation:shake .4s;
 }
 
 @keyframes shake{
@@ -132,18 +140,33 @@ animation:shake 0.4s;
 100%{transform:translateX(0);}
 }
 
-#shop{
-margin-top:30px;
-padding:20px;
-background:rgba(255,255,255,0.08);
-border-radius:20px;
-box-shadow:0 0 20px rgba(0,255,255,0.4);
+.enemy{
+position:absolute;
+font-size:30px;
+pointer-events:none;
+animation:fall linear forwards;
 }
 
-#shop h2{
-font-size:32px;
-color:cyan;
-text-shadow:0 0 15px cyan;
+@keyframes fall{
+from{
+transform:translateY(-50px);
+opacity:1;
+}
+to{
+transform:translateY(110vh);
+opacity:0;
+}
+}
+
+#shop{
+margin-top:25px;
+padding:15px;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+
+display:block;
+position:relative;
+z-index:1000;
 }
 
 @media(max-width:600px){
@@ -152,7 +175,9 @@ h1{
 font-size:36px;
 }
 
-input,button,select{
+input,
+button,
+select{
 width:90%;
 font-size:18px;
 }
@@ -174,6 +199,12 @@ font-size:18px;
 
 <div id="hearts"></div>
 
+<div id="god">👑 GOD MODE: OFF</div>
+
+<div id="coins">🪙 Монети: 0</div>
+
+<div id="playerLevel">🏅 Рівень: 1</div>
+
 <select id="level">
 <option value="50">😊 Легко</option>
 <option value="100">😎 Середньо</option>
@@ -188,8 +219,7 @@ font-size:18px;
 type="number"
 id="guess"
 placeholder="Введи число"
-min="1"
->
+min="1">
 
 <br>
 
@@ -201,6 +231,10 @@ min="1"
 🔄 Нова гра
 </button>
 
+<button onclick="activateGodMode()">
+👑 GOD MODE
+</button>
+
 <div id="result"></div>
 
 <div id="bar">
@@ -210,8 +244,7 @@ min="1"
 <div id="leaderboard"></div>
 
 <div id="shop">
-
-<h2>🛒 МАГАЗИН</h2>
+<h2>🛒 Магазин</h2>
 
 <button onclick="buyLife()">
 ❤️ Купити життя (50)
@@ -220,7 +253,6 @@ min="1"
 <button onclick="buyHint()">
 💡 Підказка (30)
 </button>
-
 </div>
 
 </div>
@@ -231,27 +263,81 @@ let secret = 0;
 let max = 100;
 let attempts = 0;
 
-/* 🔥 50 ЖИТТІВ */
-let lives = 50;
-
+let lives = 10;
 let score = 0;
+let coins = 0;
+let xp = 0;
+let playerLevel = 1;
+
 let gameOver = false;
+let godMode = false;
 
 let startTime;
 let timerInterval;
 
 function updateHearts(){
-
 document.getElementById("hearts").innerHTML =
-"❤️".repeat(lives);
-
+"❤️ Життя: " + lives;
 }
 
 function updateScore(){
-
 document.getElementById("score").innerHTML =
 `⭐ Очки: ${score}`;
+}
 
+function updateCoins(){
+document.getElementById("coins").innerHTML =
+`🪙 Монети: ${coins}`;
+}
+
+function updatePlayerLevel(){
+document.getElementById("playerLevel").innerHTML =
+`🏅 Рівень: ${playerLevel}`;
+}
+
+function addXP(amount){
+
+xp += amount;
+
+if(xp >= playerLevel * 100){
+
+xp = 0;
+playerLevel++;
+
+document.getElementById("result").innerHTML =
+`🏅 НОВИЙ РІВЕНЬ ${playerLevel}!`;
+
+createParticles();
+}
+
+updatePlayerLevel();
+}
+
+function createParticles(){
+
+for(let i=0;i<20;i++){
+
+let p = document.createElement("div");
+
+p.className = "enemy";
+
+p.innerHTML =
+["🔥","⭐","⚡","💎","👑"]
+[Math.floor(Math.random()*5)];
+
+p.style.left =
+Math.random()*100 + "vw";
+
+p.style.animationDuration =
+(Math.random()*3+2) + "s";
+
+document.body.appendChild(p);
+
+setTimeout(()=>{
+p.remove();
+},5000);
+
+}
 }
 
 function newGame(){
@@ -264,17 +350,41 @@ Math.floor(Math.random()*max)+1;
 
 attempts = 0;
 
-/* 🔥 СТАРТ 50 ЖИТТІВ */
+if(max == 50){
 lives = 50;
+}
+else if(max == 100){
+lives = 35;
+}
+else if(max == 500){
+lives = 20;
+}
+else if(max == 1000){
+lives = 10;
+}
+else{
+lives = 5;
+}
+
+if(godMode){
+lives = 999;
+}
 
 gameOver = false;
 
+document.getElementById("result").innerHTML = "";
+document.getElementById("result").classList.remove("win");
+
+document.getElementById("guess").value = "";
+
+document.getElementById("fill").style.width = "0%";
+
 updateHearts();
+updateScore();
+updateCoins();
+updatePlayerLevel();
 
 startTime = Date.now();
-
-document.getElementById("result").innerHTML="";
-document.getElementById("fill").style.width="0%";
 
 clearInterval(timerInterval);
 
@@ -314,7 +424,7 @@ function saveRecord(time){
 let best =
 localStorage.getItem("bestTime");
 
-if(!best || time < best){
+if(!best || time < Number(best)){
 
 localStorage.setItem("bestTime",time);
 
@@ -327,7 +437,6 @@ document.getElementById("leaderboard").innerHTML =
 `🏆 Рекорд: ${best} сек`;
 
 }
-
 }
 
 function buyLife(){
@@ -335,22 +444,20 @@ function buyLife(){
 if(score >= 50){
 
 score -= 50;
-
 lives++;
 
 updateScore();
 updateHearts();
 
 document.getElementById("result").innerHTML =
-"❤️ Куплено життя!";
+"❤️ Життя куплено!";
 
 }else{
 
 document.getElementById("result").innerHTML =
-"❌ Мало очок";
+"❌ Недостатньо очок";
 
 }
-
 }
 
 function buyHint(){
@@ -376,10 +483,30 @@ document.getElementById("result").innerHTML =
 }else{
 
 document.getElementById("result").innerHTML =
-"❌ Мало очок";
+"❌ Недостатньо очок";
 
 }
+}
 
+function activateGodMode(){
+
+if(godMode) return;
+
+godMode = true;
+
+lives = 999;
+score += 10000;
+
+updateHearts();
+updateScore();
+
+document.getElementById("god").innerHTML =
+"👑 GOD MODE: ON";
+
+document.getElementById("result").innerHTML =
+"👑 РЕЖИМ БОГА АКТИВОВАНО";
+
+createParticles();
 }
 
 function checkGame(){
@@ -398,13 +525,20 @@ result.innerHTML =
 "⚠️ Введи число";
 
 return;
+}
 
+if(user > max){
+
+result.innerHTML =
+`⚠️ Максимум ${max}`;
+
+return;
 }
 
 attempts++;
 
 let diff =
-Math.abs(secret-user);
+Math.abs(secret - user);
 
 let progress =
 Math.max(0,100-(diff/max*100));
@@ -417,31 +551,39 @@ let time =
 Math.floor((Date.now()-startTime)/1000);
 
 score += 100;
+coins += 25;
 
 updateScore();
+updateCoins();
+
+addXP(50);
 
 result.innerHTML =
 
-`🔥 ПЕРЕМОГА
-<br>🎯 ${secret}
-<br>🧠 ${attempts} спроб
-<br>⏳ ${time} сек`;
+`🔥 ПЕРЕМОГА!
+<br>🎯 Число: ${secret}
+<br>🧠 Спроб: ${attempts}
+<br>⏳ Час: ${time} сек
+<br>🪙 +25 монет`;
 
 result.classList.add("win");
 
 saveRecord(time);
+
+createParticles();
 
 clearInterval(timerInterval);
 
 gameOver = true;
 
 return;
-
 }
 
 shake();
 
+if(!godMode){
 lives--;
+}
 
 updateHearts();
 
@@ -450,14 +592,13 @@ if(lives <= 0){
 result.innerHTML =
 
 `💀 GAME OVER
-<br>Число було: ${secret}`;
+<br>🎯 Число було: ${secret}`;
 
 clearInterval(timerInterval);
 
 gameOver = true;
 
 return;
-
 }
 
 if(diff <= 5){
@@ -465,12 +606,14 @@ if(diff <= 5){
 result.innerHTML =
 "🔥 Дуже гаряче!";
 
-}else if(diff <= 15){
+}
+else if(diff <= 15){
 
 result.innerHTML =
 "🌡️ Близько!";
 
-}else{
+}
+else{
 
 result.innerHTML =
 "❄️ Далеко!";
@@ -489,19 +632,41 @@ result.innerHTML +=
 
 }
 
+document.getElementById("guess").value = "";
 }
 
 document
 .getElementById("guess")
 .addEventListener("keydown",e=>{
 
-if(e.key==="Enter"){
-
+if(e.key === "Enter"){
 checkGame();
-
 }
 
 });
+
+setInterval(()=>{
+
+let star =
+document.createElement("div");
+
+star.className = "enemy";
+
+star.innerHTML = "✨";
+
+star.style.left =
+Math.random()*100 + "vw";
+
+star.style.animationDuration =
+(Math.random()*4+3) + "s";
+
+document.body.appendChild(star);
+
+setTimeout(()=>{
+star.remove();
+},7000);
+
+},500);
 
 newGame();
 
