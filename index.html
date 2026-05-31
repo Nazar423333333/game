@@ -421,7 +421,7 @@ function addXP(amount){
 
     updatePlayerLevel();
     updateXPBar();
-    saveProgress();
+    saveProgress(); 
 }
 
 function createParticles(){
@@ -590,6 +590,7 @@ function saveProgress(){
     localStorage.setItem("wins", wins);
     localStorage.setItem("achievements", achievements);
     localStorage.setItem("playerLevel", playerLevel);
+    localStorage.setItem("xp", xp); 
 }
 function activateGodMode(){
 
