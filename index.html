@@ -545,50 +545,51 @@ function saveRecord(time){
 
 function buyLife(){
 
-    if(score >= 50){
+    if(coins >= 50){
 
-        score -= 50;
+        coins -= 50;
         lives++;
 
-        updateScore();
+        updateCoins();
         updateHearts();
+        saveProgress();
 
         document.getElementById("result").innerHTML =
         "❤️ Життя куплено!";
 
-    }else{
+    } else {
 
         document.getElementById("result").innerHTML =
-        "❌ Недостатньо очок";
+        "❌ Недостатньо монет";
     }
 }
-
 function buyHint(){
 
-    if(score >= 30){
+    if(coins >= 30){
 
-        score -= 30;
+        coins -= 30;
 
-        updateScore();
-
-        if(secret % 2 === 0){
-
-            document.getElementById("result").innerHTML =
-            "💡 Число парне";
-
-        }else{
-
-            document.getElementById("result").innerHTML =
-            "💡 Число непарне";
-        }
-
-    }else{
+        updateCoins();
+        saveProgress();
 
         document.getElementById("result").innerHTML =
-        "❌ Недостатньо очок";
+        (secret % 2 === 0)
+        ? "💡 Число парне"
+        : "💡 Число непарне";
+
+    } else {
+
+        document.getElementById("result").innerHTML =
+        "❌ Недостатньо монет";
     }
 }
 
+function saveProgress(){
+    localStorage.setItem("coins", coins);
+    localStorage.setItem("score", score);
+    localStorage.setItem("wins", wins);
+    localStorage.setItem("achievements", achievements);
+}
 function activateGodMode(){
 
     if(godMode) return;
