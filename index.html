@@ -589,6 +589,7 @@ function saveProgress(){
     localStorage.setItem("score", score);
     localStorage.setItem("wins", wins);
     localStorage.setItem("achievements", achievements);
+    localStorage.setItem("playerLevel", playerLevel);
 }
 function activateGodMode(){
 
@@ -794,14 +795,12 @@ setInterval(()=>{
 },500);
 
 newGame();
-
-updateHearts();
-updateScore();
-updateCoins();
 updatePlayerLevel();
+updateCoins();
+updateScore();
+updateHearts();
 updateAchievements();
 updateXPBar();
-
 </script>
 
 </body>
