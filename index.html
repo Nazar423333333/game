@@ -9,102 +9,99 @@
 <style>
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(-45deg,#020024,#090979,#000,#3a0ca3);
-background-size:400% 400%;
-animation:bg 8s ease infinite;
-color:white;
-text-align:center;
-min-height:100vh;
-overflow-y:auto;
-overflow-x:hidden;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(-45deg,#020024,#090979,#000,#3a0ca3);
+    background-size:400% 400%;
+    animation:bg 8s ease infinite;
+    color:white;
+    text-align:center;
+    min-height:100vh;
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 
 @keyframes bg{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 h1{
-font-size:55px;
-margin-top:20px;
-text-shadow:0 0 20px lime;
+    font-size:55px;
+    margin-top:20px;
+    text-shadow:0 0 20px lime;
 }
 
 .panel{
-background:rgba(255,255,255,.08);
-padding:20px;
-width:90%;
-max-width:550px;
-margin:20px auto;
-border-radius:25px;
-backdrop-filter:blur(10px);
-box-shadow:0 0 25px rgba(0,255,0,.4);
-
-max-height:85vh;
-overflow-y:auto;
+    background:rgba(255,255,255,.08);
+    padding:20px;
+    width:90%;
+    max-width:550px;
+    margin:20px auto;
+    border-radius:25px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 25px rgba(0,255,0,.4);
 }
 
 input,
 button,
 select{
-padding:14px;
-font-size:20px;
-margin:8px;
-border:none;
-border-radius:15px;
+    padding:14px;
+    font-size:20px;
+    margin:8px;
+    border:none;
+    border-radius:15px;
 }
 
 button{
-background:lime;
-cursor:pointer;
-font-weight:bold;
-transition:.3s;
+    background:lime;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
 }
 
 button:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px lime;
+    transform:scale(1.05);
+    box-shadow:0 0 20px lime;
 }
 
 #result{
-font-size:28px;
-margin-top:20px;
-min-height:90px;
+    font-size:28px;
+    margin-top:20px;
+    min-height:90px;
 }
 
 #bar{
-width:100%;
-height:24px;
-background:#222;
-border-radius:20px;
-overflow:hidden;
-margin-top:20px;
+    width:100%;
+    height:24px;
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:20px;
 }
 
 #fill{
-height:100%;
-width:0%;
-background:linear-gradient(
-90deg,
-red,
-orange,
-yellow,
-lime,
-cyan,
-blue,
-purple
-);
-background-size:400% 400%;
-animation:rgb 3s linear infinite;
-transition:.3s;
+    height:100%;
+    width:0%;
+    background:linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        purple
+    );
+    background-size:400% 400%;
+    animation:rgb 3s linear infinite;
+    transition:.3s;
 }
 
 @keyframes rgb{
-0%{background-position:0% 50%;}
-100%{background-position:100% 50%;}
+    0%{background-position:0% 50%;}
+    100%{background-position:100% 50%;}
 }
 
 #timer,
@@ -113,76 +110,96 @@ transition:.3s;
 #leaderboard,
 #god,
 #coins,
-#playerLevel{
-font-size:24px;
-margin-top:10px;
+#playerLevel,
+#achievements{
+    font-size:24px;
+    margin-top:10px;
+}
+
+#xpBar{
+    width:100%;
+    height:18px;
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+#xpFill{
+    height:100%;
+    width:0%;
+    background:lime;
+    transition:.3s;
 }
 
 .win{
-animation:win 1s infinite;
+    animation:win 1s infinite;
 }
 
 @keyframes win{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+    100%{transform:scale(1);}
 }
 
 .shake{
-animation:shake .4s;
+    animation:shake .4s;
 }
 
 @keyframes shake{
-0%{transform:translateX(0);}
-25%{transform:translateX(-10px);}
-50%{transform:translateX(10px);}
-75%{transform:translateX(-10px);}
-100%{transform:translateX(0);}
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-10px);}
+    50%{transform:translateX(10px);}
+    75%{transform:translateX(-10px);}
+    100%{transform:translateX(0);}
 }
 
 .enemy{
-position:absolute;
-font-size:30px;
-pointer-events:none;
-animation:fall linear forwards;
+    position:absolute;
+    font-size:30px;
+    pointer-events:none;
+    animation:fall linear forwards;
 }
 
 @keyframes fall{
-from{
-transform:translateY(-50px);
-opacity:1;
-}
-to{
-transform:translateY(110vh);
-opacity:0;
-}
+    from{
+        transform:translateY(-50px);
+        opacity:1;
+    }
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
 }
 
 #shop{
+    margin-top:25px;
+    padding:15px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+}
 
-margin-top:25px;
-padding:15px;
-border-radius:20px;
-background:rgba(255,255,255,.08);
-
-display:block;
-position:relative;
-z-index:1000;
+#helpBox{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    background:rgba(0,0,0,.6);
+    border-radius:15px;
+    border:2px solid lime;
 }
 
 @media(max-width:600px){
 
-h1{
-font-size:36px;
-}
+    h1{
+        font-size:36px;
+    }
 
-input,
-button,
-select{
-width:90%;
-font-size:18px;
-}
-
+    input,
+    button,
+    select{
+        width:90%;
+        font-size:18px;
+    }
 }
 
 </style>
@@ -195,27 +212,24 @@ font-size:18px;
 <div class="panel">
 
 <div id="timer">⏳ 0 сек</div>
-
 <div id="score">⭐ Очки: 0</div>
-
 <div id="hearts"></div>
-
 <div id="god">👑 GOD MODE: OFF</div>
-
 <div id="coins">🪙 Монети: 0</div>
-
 <div id="playerLevel">🏅 Рівень: 1</div>
+
 <div id="xpBar">
-<div id="xpFill"></div>
+    <div id="xpFill"></div>
 </div>
 
 <div id="achievements">🏆 Досягнення: 0</div>
+
 <select id="level">
-<option value="50">😊 Легко</option>
-<option value="100">😎 Середньо</option>
-<option value="500">🔥 Складно</option>
-<option value="1000">💀 Божевільно</option>
-<option value="10000">☠️ НЕМОЖЛИВО</option>
+    <option value="50">😊 Легко</option>
+    <option value="100">😎 Середньо</option>
+    <option value="500">🔥 Складно</option>
+    <option value="1000">💀 Божевільно</option>
+    <option value="10000">☠️ НЕМОЖЛИВО</option>
 </select>
 
 <br>
@@ -236,6 +250,10 @@ min="1">
 🔄 Нова гра
 </button>
 
+<button onclick="showHelp()">
+❓ Як грати
+</button>
+
 <button onclick="activateGodMode()">
 👑 GOD MODE
 </button>
@@ -247,21 +265,68 @@ min="1">
 <div id="result"></div>
 
 <div id="bar">
-<div id="fill"></div>
+    <div id="fill"></div>
 </div>
+<div id="helpBox" style="
+display:none;
+margin-top:15px;
+padding:15px;
+background:rgba(0,0,0,.6);
+border-radius:15px;
+border:2px solid lime;
+">
 
+<h3>❓ Як грати</h3>
+
+<p>
+🎯 Вгадай випадкове число<br>
+⬆️ Більше<br>
+⬇️ Менше<br>
+🔥 Дуже гаряче<br>
+❄️ Далеко<br><br>
+
+🏆 +100 очок<br>
+🪙 +25 монет
+</p>
+
+<button onclick="hideHelp()">
+❌ Закрити
+</button>
+
+</div>
 <div id="leaderboard"></div>
 
 <div id="shop">
-<h2>🛒 Магазин</h2>
+    <h2>🛒 Магазин</h2>
 
-<button onclick="buyLife()">
-❤️ Купити життя (50)
+    <button onclick="buyLife()">
+    ❤️ Купити життя (50)
+    </button>
+
+    <button onclick="buyHint()">
+    💡 Підказка (30)
+    </button>
+</div>
+
+<div id="helpBox">
+
+<h3>❓ Як грати</h3>
+
+<p>
+🎯 Вгадай випадкове число<br>
+⬆️ Більше<br>
+⬇️ Менше<br>
+🔥 Дуже гаряче<br>
+❄️ Далеко<br><br>
+
+🏆 +100 очок<br>
+🪙 +25 монет
+</p>
+
+<button onclick="hideHelp()">
+❌ Закрити
 </button>
 
-<button onclick="buyHint()">
-💡 Підказка (30)
-</button>
 </div>
 
 </div>
@@ -274,244 +339,262 @@ let attempts = 0;
 
 let lives = 10;
 let score = 0;
-let coins = 0;
+let coins =
+Number(localStorage.getItem("coins")) || 0;
+
 let xp = 0;
-let playerLevel = 1;
+
+let playerLevel =
+Number(localStorage.getItem("playerLevel")) || 1;
+
 let achievements = 0;
 let wins = 0;
 
-coins =
-Number(localStorage.getItem("coins")) || 0;
-
-playerLevel =
-Number(localStorage.getItem("playerLevel")) || 1;
 let gameOver = false;
 let godMode = false;
 
 let startTime;
 let timerInterval;
 
+function showHelp(){
+    document.getElementById("helpBox").style.display = "block";
+}
+
+function hideHelp(){
+    document.getElementById("helpBox").style.display = "none";
+}
+
 function updateHearts(){
-document.getElementById("hearts").innerHTML =
-"❤️ Життя: " + lives;
+    document.getElementById("hearts").innerHTML =
+    "❤️ Життя: " + lives;
 }
 
 function updateScore(){
-document.getElementById("score").innerHTML =
-`⭐ Очки: ${score}`;
+    document.getElementById("score").innerHTML =
+    `⭐ Очки: ${score}`;
 }
 
 function updateCoins(){
-document.getElementById("coins").innerHTML =
-`🪙 Монети: ${coins}`;
+    document.getElementById("coins").innerHTML =
+    `🪙 Монети: ${coins}`;
 }
 
 function updatePlayerLevel(){
-document.getElementById("playerLevel").innerHTML =
-`🏅 Рівень: ${playerLevel}`;
+    document.getElementById("playerLevel").innerHTML =
+    `🏅 Рівень: ${playerLevel}`;
+}
+
+function updateAchievements(){
+    document.getElementById("achievements").innerHTML =
+    `🏆 Досягнення: ${achievements}`;
+}
+
+function updateXPBar(){
+
+    let xpFill =
+    document.getElementById("xpFill");
+
+    xpFill.style.width =
+    (xp / (playerLevel * 100) * 100) + "%";
+}
+
+function saveProgress(){
+
+    localStorage.setItem("coins", coins);
+    localStorage.setItem("playerLevel", playerLevel);
 }
 
 function addXP(amount){
 
-xp += amount;
+    xp += amount;
 
-if(xp >= playerLevel * 100){
+    if(xp >= playerLevel * 100){
 
-xp = 0;
-playerLevel++;
+        xp = 0;
+        playerLevel++;
 
-document.getElementById("result").innerHTML =
-`🏅 НОВИЙ РІВЕНЬ ${playerLevel}!`;
+        document.getElementById("result").innerHTML =
+        `🏅 НОВИЙ РІВЕНЬ ${playerLevel}!`;
 
-createParticles();
-}
+        createParticles();
+    }
 
-updatePlayerLevel();
-updateXPBar();
-saveProgress();
+    updatePlayerLevel();
+    updateXPBar();
+    saveProgress();
 }
 
 function createParticles(){
 
-for(let i=0;i<20;i++){
+    for(let i=0;i<20;i++){
 
-let p = document.createElement("div");
+        let p =
+        document.createElement("div");
 
-p.className = "enemy";
+        p.className = "enemy";
 
-p.innerHTML =
-["🔥","⭐","⚡","💎","👑"]
-[Math.floor(Math.random()*5)];
+        p.innerHTML =
+        ["🔥","⭐","⚡","💎","👑"]
+        [Math.floor(Math.random()*5)];
 
-p.style.left =
-Math.random()*100 + "vw";
+        p.style.left =
+        Math.random()*100 + "vw";
 
-p.style.animationDuration =
-(Math.random()*3+2) + "s";
+        p.style.animationDuration =
+        (Math.random()*3+2) + "s";
 
-document.body.appendChild(p);
+        document.body.appendChild(p);
 
-setTimeout(()=>{
-p.remove();
-},5000);
-
-}
+        setTimeout(()=>{
+            p.remove();
+        },5000);
+    }
 }
 
 function newGame(){
 
-max =
-Number(document.getElementById("level").value);
+    max =
+    Number(document.getElementById("level").value);
 
-secret =
-Math.floor(Math.random()*max)+1;
+    secret =
+    Math.floor(Math.random()*max)+1;
 
-attempts = 0;
+    attempts = 0;
 
-if(max == 50){
-lives = 50;
-}
-else if(max == 100){
-lives = 35;
-}
-else if(max == 500){
-lives = 20;
-}
-else if(max == 1000){
-lives = 10;
-}
-else{
-lives = 5;
-}
+    if(max == 50){
+        lives = 50;
+    }
+    else if(max == 100){
+        lives = 35;
+    }
+    else if(max == 500){
+        lives = 20;
+    }
+    else if(max == 1000){
+        lives = 10;
+    }
+    else{
+        lives = 5;
+    }
 
-if(godMode){
-lives = 999;
-}
+    if(godMode){
+        lives = 999;
+    }
 
-gameOver = false;
+    gameOver = false;
 
-document.getElementById("result").innerHTML = "";
-document.getElementById("result").classList.remove("win");
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("guess").value = "";
+    document.getElementById("fill").style.width = "0%";
 
-document.getElementById("guess").value = "";
+    updateHearts();
+    updateScore();
+    updateCoins();
+    updatePlayerLevel();
 
-document.getElementById("fill").style.width = "0%";
+    startTime = Date.now();
 
-updateHearts();
-updateScore();
-updateCoins();
-updatePlayerLevel();
+    clearInterval(timerInterval);
 
-startTime = Date.now();
+    timerInterval = setInterval(()=>{
 
-clearInterval(timerInterval);
+        let sec =
+        Math.floor((Date.now()-startTime)/1000);
 
-timerInterval = setInterval(()=>{
+        document.getElementById("timer").innerHTML =
+        `⏳ ${sec} сек`;
 
-let sec =
-Math.floor((Date.now()-startTime)/1000);
-
-document.getElementById("timer").innerHTML =
-`⏳ ${sec} сек`;
-
-},1000);
-
+    },1000);
 }
 
 function updateBar(value){
 
-document.getElementById("fill").style.width =
-value + "%";
-
+    document.getElementById("fill").style.width =
+    value + "%";
 }
 
 function shake(){
 
-document.body.classList.add("shake");
+    document.body.classList.add("shake");
 
-setTimeout(()=>{
+    setTimeout(()=>{
 
-document.body.classList.remove("shake");
+        document.body.classList.remove("shake");
 
-},400);
-
+    },400);
 }
 
 function saveRecord(time){
 
-let best =
-localStorage.getItem("bestTime");
+    let best =
+    localStorage.getItem("bestTime");
 
-if(!best || time < Number(best)){
+    if(!best || time < Number(best)){
 
-localStorage.setItem("bestTime",time);
+        localStorage.setItem("bestTime",time);
 
-document.getElementById("leaderboard").innerHTML =
-`🏆 Новий рекорд: ${time} сек`;
+        document.getElementById("leaderboard").innerHTML =
+        `🏆 Новий рекорд: ${time} сек`;
 
-}else{
+    }else{
 
-document.getElementById("leaderboard").innerHTML =
-`🏆 Рекорд: ${best} сек`;
-
-}
+        document.getElementById("leaderboard").innerHTML =
+        `🏆 Рекорд: ${best} сек`;
+    }
 }
 
 function buyLife(){
 
-if(score >= 50){
+    if(score >= 50){
 
-score -= 50;
-lives++;
+        score -= 50;
+        lives++;
 
-updateScore();
-updateHearts();
+        updateScore();
+        updateHearts();
 
-document.getElementById("result").innerHTML =
-"❤️ Життя куплено!";
+        document.getElementById("result").innerHTML =
+        "❤️ Життя куплено!";
 
-}else{
+    }else{
 
-document.getElementById("result").innerHTML =
-"❌ Недостатньо очок";
-
-}
+        document.getElementById("result").innerHTML =
+        "❌ Недостатньо очок";
+    }
 }
 
 function buyHint(){
 
-if(score >= 30){
+    if(score >= 30){
 
-score -= 30;
+        score -= 30;
 
-updateScore();
+        updateScore();
 
-if(secret % 2 === 0){
+        if(secret % 2 === 0){
 
-document.getElementById("result").innerHTML =
-"💡 Число парне";
+            document.getElementById("result").innerHTML =
+            "💡 Число парне";
 
-}else{
+        }else{
 
-document.getElementById("result").innerHTML =
-"💡 Число непарне";
+            document.getElementById("result").innerHTML =
+            "💡 Число непарне";
+        }
 
+    }else{
+
+        document.getElementById("result").innerHTML =
+        "❌ Недостатньо очок";
+    }
 }
-
-}else{
-
-document.getElementById("result").innerHTML =
-"❌ Недостатньо очок";
-
-}
-}
-
 
 function activateGodMode(){
 
     if(godMode) return;
 
     godMode = true;
+
     lives = 999;
     score += 10000;
 
@@ -530,215 +613,194 @@ function activateGodMode(){
 function deactivateGodMode(){
 
     godMode = false;
-        score =0
+
+    score = 0;
+
     document.getElementById("god").innerHTML =
     "👑 GOD MODE: OFF";
 
-    newGame();
-function updateAchievements(){
-    document.getElementById("achievements").innerHTML =
-    "🏆 Досягнення: " + achievements;
-}
-
-function updateXPBar(){
-    let xpFill = document.getElementById("xpFill");
-    if(!xpFill) return;
-
-    xpFill.style.width =
-    (xp/(playerLevel*100)*100) + "%";
-}
-
-function saveProgress(){
-    localStorage.setItem("coins", coins);
-    localStorage.setItem("playerLevel", playerLevel);
-}
     document.getElementById("result").innerHTML =
     "❌ РЕЖИМ БОГА ВИМКНЕНО";
+
+    newGame();
 }
-
-
 
 function checkGame(){
 
-if(gameOver) return;
+    if(gameOver) return;
 
-let user =
-Number(document.getElementById("guess").value);
+    let user =
+    Number(document.getElementById("guess").value);
 
-let result =
-document.getElementById("result");
+    let result =
+    document.getElementById("result");
 
-if(!user || user < 1){
+    if(!user || user < 1){
 
-result.innerHTML =
-"⚠️ Введи число";
+        result.innerHTML =
+        "⚠️ Введи число";
 
-return;
-}
+        return;
+    }
 
-if(user > max){
+    if(user > max){
 
-result.innerHTML =
-`⚠️ Максимум ${max}`;
+        result.innerHTML =
+        `⚠️ Максимум ${max}`;
 
-return;
-}
+        return;
+    }
 
-attempts++;
+    attempts++;
 
-let diff =
-Math.abs(secret - user);
+    let diff =
+    Math.abs(secret - user);
 
-let progress =
-Math.max(0,100-(diff/max*100));
+    let progress =
+    Math.max(0,100-(diff/max*100));
 
-updateBar(progress);
+    updateBar(progress);
 
-if(user === secret){
+    if(user === secret){
 
-let time =
-Math.floor((Date.now()-startTime)/1000);
+        let time =
+        Math.floor((Date.now()-startTime)/1000);
 
-score += 100;
-coins += 25;
-wins++;
-updateScore();
-updateCoins();
+        score += 100;
+        coins += 25;
+        wins++;
 
-addXP(50);
-if(wins === 5){
+        updateScore();
+        updateCoins();
 
-achievements++;
+        addXP(50);
 
-document.getElementById("result").innerHTML +=
-"<br>🏆 Досягнення: Майстер";
+        if(wins === 5){
 
-updateAchievements();
+            achievements++;
 
-}
+            updateAchievements();
+        }
 
-if(playerLevel >= 5){
+        result.innerHTML =
 
-coins += 500;
+        `🔥 ПЕРЕМОГА!
+        <br>🎯 Число: ${secret}
+        <br>🧠 Спроб: ${attempts}
+        <br>⏳ Час: ${time} сек
+        <br>🪙 +25 монет`;
 
-document.getElementById("result").innerHTML +=
-"<br>👹 Бос переможений!";
+        result.classList.add("win");
 
-}
-result.innerHTML =
+        saveRecord(time);
 
-`🔥 ПЕРЕМОГА!
-<br>🎯 Число: ${secret}
-<br>🧠 Спроб: ${attempts}
-<br>⏳ Час: ${time} сек
-<br>🪙 +25 монет`;
+        createParticles();
 
-result.classList.add("win");
+        clearInterval(timerInterval);
 
-saveRecord(time);
+        gameOver = true;
 
-createParticles();
+        saveProgress();
 
-clearInterval(timerInterval);
+        return;
+    }
 
-gameOver = true;
+    shake();
 
-return;
-}
+    if(!godMode){
+        lives--;
+    }
 
-shake();
+    updateHearts();
 
-if(!godMode){
-lives--;
-}
+    if(lives <= 0){
 
-updateHearts();
+        result.innerHTML =
 
-if(lives <= 0){
+        `💀 GAME OVER
+        <br>🎯 Число було: ${secret}`;
 
-result.innerHTML =
+        clearInterval(timerInterval);
 
-`💀 GAME OVER
-<br>🎯 Число було: ${secret}`;
+        gameOver = true;
 
-clearInterval(timerInterval);
+        return;
+    }
 
-gameOver = true;
+    if(diff <= 5){
 
-return;
-}
+        result.innerHTML =
+        "🔥 Дуже гаряче!";
 
-if(diff <= 5){
+    }
+    else if(diff <= 15){
 
-result.innerHTML =
-"🔥 Дуже гаряче!";
+        result.innerHTML =
+        "🌡️ Близько!";
 
-}
-else if(diff <= 15){
+    }
+    else{
 
-result.innerHTML =
-"🌡️ Близько!";
+        result.innerHTML =
+        "❄️ Далеко!";
+    }
 
-}
-else{
+    if(user > secret){
 
-result.innerHTML =
-"❄️ Далеко!";
+        result.innerHTML +=
+        " ⬇️ Менше";
 
-}
+    }else{
 
-if(user > secret){
+        result.innerHTML +=
+        " ⬆️ Більше";
+    }
 
-result.innerHTML +=
-" ⬇️ Менше";
-
-}else{
-
-result.innerHTML +=
-" ⬆️ Більше";
-
-}
-
-document.getElementById("guess").value = "";
+    document.getElementById("guess").value = "";
 }
 
 document
 .getElementById("guess")
 .addEventListener("keydown",e=>{
 
-if(e.key === "Enter"){
-checkGame();
-}
+    if(e.key === "Enter"){
+        checkGame();
+    }
 
 });
 
 setInterval(()=>{
 
-let star =
-document.createElement("div");
+    let star =
+    document.createElement("div");
 
-star.className = "enemy";
+    star.className = "enemy";
 
-star.innerHTML = "✨";
+    star.innerHTML = "✨";
 
-star.style.left =
-Math.random()*100 + "vw";
+    star.style.left =
+    Math.random()*100 + "vw";
 
-star.style.animationDuration =
-(Math.random()*4+3) + "s";
+    star.style.animationDuration =
+    (Math.random()*4+3) + "s";
 
-document.body.appendChild(star);
+    document.body.appendChild(star);
 
-setTimeout(()=>{
-star.remove();
-},7000);
+    setTimeout(()=>{
+        star.remove();
+    },7000);
 
 },500);
 
 newGame();
+
+updateHearts();
+updateScore();
+updateCoins();
+updatePlayerLevel();
 updateAchievements();
 updateXPBar();
-saveProgress();
+
 </script>
 
 </body>
