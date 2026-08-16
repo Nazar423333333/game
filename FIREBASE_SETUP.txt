@@ -1,0 +1,23 @@
+SUPER GAME НАЗАРА — ONLINE SETUP
+
+1) Створи Firebase project і додай Web App.
+2) У Firebase Authentication увімкни Email/Password.
+3) Створи Cloud Firestore database.
+4) У Firestore -> Rules встав вміст файлу firestore.rules і Publish.
+5) У Firebase Project settings -> Your apps -> SDK setup and configuration скопіюй firebaseConfig.
+6) Відкрий index.html і знайди блок:
+
+const FIREBASE_CONFIG = {
+  apiKey: "PASTE_API_KEY_HERE",
+  authDomain: "PASTE_PROJECT.firebaseapp.com",
+  projectId: "PASTE_PROJECT_ID",
+  storageBucket: "PASTE_PROJECT.firebasestorage.app",
+  messagingSenderId: "PASTE_SENDER_ID",
+  appId: "PASTE_APP_ID"
+};
+
+7) Замінити значення на свій config.
+8) Залиш music.mp3 поруч із index.html.
+9) Завантаж index.html і music.mp3 у GitHub Pages.
+
+Без Firebase config кнопка "Грати локально" працює одразу.
