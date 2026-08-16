@@ -3,136 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#070b18">
+<meta name="theme-color" content="#060914">
 
-<title>🎮 SUPER GAME НАЗАРА — ULTRA</title>
+<title>🎮 SUPER GAME НАЗАРА — ACCOUNT ULTRA</title>
 
 <style>
 :root{
-    --bg:#070b18;
-    --panel:rgba(12,18,38,.78);
+    --bg:#060914;
+    --panel:rgba(13,19,40,.88);
     --panel2:rgba(255,255,255,.055);
     --line:rgba(255,255,255,.11);
-
-    --text:#f4f7ff;
-    --muted:#aab4d0;
-
-    --green:#5cff86;
-    --cyan:#58e7ff;
-    --purple:#a970ff;
-    --yellow:#ffd75e;
-    --red:#ff6577;
-
-    --shadow:0 20px 60px rgba(0,0,0,.38);
+    --text:#f5f7ff;
+    --muted:#9faacf;
+    --green:#61ff8d;
+    --cyan:#56e9ff;
+    --purple:#ad74ff;
+    --yellow:#ffd866;
+    --red:#ff647a;
 }
 
-*{
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
     min-height:100vh;
-    overflow-x:hidden;
-
-    font-family:Inter,Segoe UI,Arial,sans-serif;
-
+    font-family:Segoe UI,Arial,sans-serif;
     color:var(--text);
-
     background:
-        radial-gradient(circle at 15% 15%,rgba(88,231,255,.16),transparent 28%),
-        radial-gradient(circle at 85% 20%,rgba(169,112,255,.17),transparent 30%),
-        radial-gradient(circle at 50% 100%,rgba(92,255,134,.10),transparent 35%),
-        linear-gradient(135deg,#050714,#0a1024 48%,#070b18);
+        radial-gradient(circle at 15% 10%,rgba(86,233,255,.16),transparent 30%),
+        radial-gradient(circle at 85% 15%,rgba(173,116,255,.18),transparent 30%),
+        radial-gradient(circle at 50% 100%,rgba(97,255,141,.09),transparent 35%),
+        #060914;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-
-    background-image:
-        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
-
-    background-size:36px 36px;
-}
-
-button,
-input,
-select{
+button,input,select{
     font:inherit;
 }
 
 button{
-    user-select:none;
+    cursor:pointer;
 }
 
-.app{
-    width:min(1180px,94%);
-    margin:0 auto;
-    padding:28px 0 60px;
-
-    position:relative;
-    z-index:1;
+.hidden{
+    display:none!important;
 }
 
 /* =========================
-   HEADER
+   AUTH
 ========================= */
+
+#authScreen{
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    padding:20px;
+}
+
+.auth-card{
+    width:min(470px,96vw);
+    padding:28px;
+    border:1px solid var(--line);
+    border-radius:30px;
+    background:rgba(10,15,33,.92);
+    backdrop-filter:blur(20px);
+    box-shadow:0 30px 100px rgba(0,0,0,.5);
+}
+
+.auth-logo{
+    text-align:center;
+    font-size:55px;
+}
+
+.auth-card h1{
+    text-align:center;
+    margin:5px 0;
+}
+
+.auth-card p{
+    text-align:center;
+    color:var(--muted);
+}
+
+.auth-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:22px 0;
+}
+
+.auth-tab{
+    padding:12px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    color:white;
+    background:rgba(255,255,255,.05);
+    font-weight:800;
+}
+
+.auth-tab.active{
+    color:#03150a;
+    background:linear-gradient(135deg,var(--green),var(--cyan));
+}
+
+.auth-form{
+    display:grid;
+    gap:12px;
+}
+
+.auth-form input{
+    width:100%;
+    padding:14px 16px;
+    color:white;
+    background:#0a1125;
+    border:1px solid var(--line);
+    border-radius:14px;
+    outline:none;
+}
+
+.auth-form input:focus{
+    border-color:var(--cyan);
+    box-shadow:0 0 0 3px rgba(86,233,255,.12);
+}
+
+.auth-main{
+    padding:14px;
+    border:0;
+    border-radius:14px;
+    font-weight:900;
+    background:linear-gradient(135deg,var(--green),var(--cyan));
+}
+
+#authMessage{
+    min-height:22px;
+    color:var(--yellow);
+    text-align:center;
+    font-weight:700;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+    width:min(1200px,95%);
+    margin:auto;
+    padding:22px 0 60px;
+}
+
+.account-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:16px;
+    padding:12px 15px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:var(--panel);
+}
+
+.account-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:46px;
+    height:46px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    color:#04140a;
+    font-size:22px;
+    font-weight:1000;
+    background:linear-gradient(135deg,var(--green),var(--cyan));
+}
+
+.username{
+    font-weight:900;
+    font-size:18px;
+}
+
+.rank{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.top-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
 
 .hero{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-
-    gap:18px;
-
-    margin-bottom:18px;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:16px;
 }
 
-.brand h1{
+.hero h1{
     margin:0;
-
-    font-size:clamp(30px,5vw,58px);
-    line-height:1;
-
+    font-size:clamp(30px,5vw,56px);
     letter-spacing:-2px;
-
-    text-shadow:
-        0 0 35px rgba(92,255,134,.25);
 }
 
-.brand p{
-    margin:10px 0 0;
-
+.hero p{
     color:var(--muted);
-
-    font-size:15px;
+    margin:8px 0 0;
 }
 
-.badge{
+.ultra{
     padding:9px 14px;
-
-    border:
-        1px solid rgba(92,255,134,.35);
-
-    background:
-        rgba(92,255,134,.09);
-
-    color:#baffca;
-
     border-radius:999px;
-
-    font-weight:800;
-
-    white-space:nowrap;
+    border:1px solid rgba(97,255,141,.35);
+    color:#baffca;
+    background:rgba(97,255,141,.08);
+    font-weight:900;
 }
 
 /* =========================
@@ -141,52 +230,27 @@ button{
 
 .stats{
     display:grid;
-
-    grid-template-columns:
-        repeat(6,1fr);
-
-    gap:10px;
-
-    margin-bottom:14px;
+    grid-template-columns:repeat(6,1fr);
+    gap:9px;
+    margin-bottom:13px;
 }
 
 .stat{
-    padding:14px 12px;
-
-    background:var(--panel2);
-
-    border:
-        1px solid var(--line);
-
+    min-height:80px;
+    padding:13px;
+    border:1px solid var(--line);
     border-radius:18px;
-
-    backdrop-filter:blur(12px);
-
-    min-height:78px;
+    background:var(--panel2);
 }
 
-.stat .label{
-    font-size:12px;
-
+.stat small{
     color:var(--muted);
-
-    text-transform:uppercase;
-
-    letter-spacing:.8px;
 }
 
-.stat .value{
+.stat b{
+    display:block;
+    margin-top:7px;
     font-size:22px;
-
-    font-weight:900;
-
-    margin-top:6px;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
 }
 
 /* =========================
@@ -195,718 +259,390 @@ button{
 
 .grid{
     display:grid;
-
-    grid-template-columns:
-        minmax(0,1.45fr)
-        minmax(300px,.75fr);
-
-    gap:14px;
+    grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr);
+    gap:13px;
 }
 
 .card{
+    padding:19px;
+    border:1px solid var(--line);
+    border-radius:25px;
     background:var(--panel);
-
-    border:
-        1px solid var(--line);
-
-    border-radius:26px;
-
-    box-shadow:var(--shadow);
-
     backdrop-filter:blur(16px);
-}
-
-.game-card{
-    padding:22px;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
 }
 
 .side{
     display:grid;
-
-    gap:14px;
-
+    gap:13px;
     align-content:start;
 }
 
-.side .card{
-    padding:18px;
-}
-
-/* =========================
-   TOP
-========================= */
-
 .topline{
     display:flex;
-
-    gap:10px;
-
     align-items:center;
-
     justify-content:space-between;
-
+    gap:10px;
     flex-wrap:wrap;
 }
 
+.small{
+    color:var(--muted);
+    font-size:12px;
+}
+
 select,
-input[type="number"]{
-    border:
-        1px solid rgba(255,255,255,.13);
-
-    background:#0b1228;
-
+#guess{
     color:white;
-
+    background:#0a1125;
+    border:1px solid var(--line);
+    border-radius:14px;
     outline:none;
-
-    border-radius:15px;
 }
 
 select{
-    padding:11px 13px;
-
-    min-width:210px;
+    padding:11px 12px;
 }
 
-select:focus,
-input:focus{
-    border-color:var(--cyan);
+#guess{
+    width:100%;
+    padding:16px;
+    font-size:22px;
+    font-weight:900;
+}
 
-    box-shadow:
-        0 0 0 3px
-        rgba(88,231,255,.12);
+#guess:focus,
+select:focus{
+    border-color:var(--cyan);
 }
 
 /* =========================
-   XP
+   BARS
 ========================= */
 
-.xp-wrap{
-    margin:18px 0 4px;
-}
-
-.xp-head{
+.bar-head{
     display:flex;
-
     justify-content:space-between;
-
+    margin-bottom:6px;
     color:var(--muted);
-
     font-size:13px;
-
-    margin-bottom:7px;
 }
 
 .track{
-    height:13px;
-
-    border-radius:999px;
-
-    background:#080d1d;
-
+    width:100%;
+    height:14px;
     overflow:hidden;
-
-    border:
-        1px solid rgba(255,255,255,.08);
+    border-radius:999px;
+    background:#060b19;
+    border:1px solid rgba(255,255,255,.08);
 }
 
 .fill{
+    width:0;
     height:100%;
-
-    width:0%;
-
-    border-radius:inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--green),
-            var(--cyan),
-            var(--purple)
-        );
-
-    background-size:
-        220% 100%;
-
-    animation:
-        flow 4s linear infinite;
-
-    transition:
-        width .32s ease;
+    border-radius:999px;
+    background:linear-gradient(90deg,var(--green),var(--cyan),var(--purple));
+    transition:.3s;
 }
 
-@keyframes flow{
-    to{
-        background-position:220% 0;
-    }
+#heatFill{
+    background:linear-gradient(90deg,#61708e,var(--cyan),var(--yellow),var(--red));
+}
+
+.xp-area{
+    margin:18px 0;
 }
 
 /* =========================
-   GAME
+   PLAY
 ========================= */
 
 .play-zone{
-    margin-top:20px;
-
-    padding:22px;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.025)
-        );
-
-    border:
-        1px solid rgba(255,255,255,.09);
+    padding:18px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:21px;
+    background:rgba(255,255,255,.025);
 }
 
-.range{
+#rangeText{
     color:var(--muted);
-
-    font-size:14px;
-
-    margin-bottom:12px;
+    margin-bottom:11px;
 }
 
 .guess-row{
     display:grid;
-
-    grid-template-columns:
-        1fr auto;
-
-    gap:10px;
-}
-
-input[type="number"]{
-    width:100%;
-
-    padding:16px 18px;
-
-    font-size:22px;
-
-    font-weight:800;
+    grid-template-columns:1fr auto;
+    gap:9px;
 }
 
 .primary{
+    min-width:155px;
     border:0;
-
-    border-radius:15px;
-
-    padding:0 22px;
-
-    min-height:58px;
-
-    font-weight:900;
-
-    color:#04120a;
-
-    background:
-        linear-gradient(
-            135deg,
-            #65ff8e,
-            #44e7ff
-        );
-
-    cursor:pointer;
-
-    box-shadow:
-        0 10px 24px
-        rgba(92,255,134,.14);
-
-    transition:.18s ease;
+    border-radius:14px;
+    padding:0 18px;
+    color:#04140a;
+    background:linear-gradient(135deg,var(--green),var(--cyan));
+    font-weight:1000;
 }
 
 .primary:hover{
-    transform:
-        translateY(-2px);
-
-    filter:
-        brightness(1.06);
+    filter:brightness(1.08);
+    transform:translateY(-1px);
 }
 
-.primary:active{
-    transform:
-        translateY(0)
-        scale(.98);
-}
-
-.result{
-    min-height:88px;
-
+#result{
+    min-height:100px;
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     text-align:center;
-
-    font-size:
-        clamp(21px,3vw,30px);
-
+    font-size:clamp(20px,3vw,29px);
     font-weight:900;
-
-    margin:14px 0 4px;
-
-    line-height:1.35;
+    line-height:1.4;
 }
-
-/* =========================
-   HEAT
-========================= */
-
-.proximity{
-    margin-top:13px;
-}
-
-.proximity .track{
-    height:20px;
-}
-
-#heatFill{
-    background:
-        linear-gradient(
-            90deg,
-            #5f6b83,
-            #58e7ff,
-            #ffd75e,
-            #ff6577
-        );
-
-    transition:
-        width .25s;
-}
-
-/* =========================
-   BUTTONS
-========================= */
 
 .actions{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:9px;
-
-    margin-top:18px;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:16px;
 }
 
 .btn{
-    border:
-        1px solid rgba(255,255,255,.12);
-
+    padding:11px 10px;
     color:white;
-
-    background:
-        rgba(255,255,255,.065);
-
-    border-radius:14px;
-
-    padding:12px 10px;
-
-    cursor:pointer;
-
+    border:1px solid var(--line);
+    border-radius:13px;
+    background:rgba(255,255,255,.055);
     font-weight:800;
-
-    transition:.18s ease;
 }
 
 .btn:hover{
-    background:
-        rgba(255,255,255,.11);
-
-    transform:
-        translateY(-1px);
+    background:rgba(255,255,255,.1);
 }
 
-.btn.good{
-    border-color:
-        rgba(92,255,134,.35);
+.btn.green{
+    border-color:rgba(97,255,141,.4);
 }
 
-.btn.warn{
-    border-color:
-        rgba(255,215,94,.35);
+.btn.yellow{
+    border-color:rgba(255,216,102,.45);
 }
 
-.btn.danger{
-    border-color:
-        rgba(255,101,119,.35);
+.btn.red{
+    border-color:rgba(255,100,122,.45);
 }
 
 .btn.active{
-    background:
-        rgba(92,255,134,.15);
-
-    border-color:
-        rgba(92,255,134,.65);
-
-    box-shadow:
-        0 0 22px
-        rgba(92,255,134,.11);
+    background:rgba(97,255,141,.14);
+    border-color:var(--green);
 }
 
 /* =========================
-   SHOP
+   SIDE
 ========================= */
 
-.section-title{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    margin:0 0 12px;
-
+.card h2{
+    margin:0 0 13px;
     font-size:19px;
 }
 
-.small{
-    font-size:12px;
-
-    color:var(--muted);
-}
-
-.shop-grid{
+.shop{
     display:grid;
-
-    gap:9px;
+    gap:8px;
 }
 
 .shop-item{
     display:grid;
-
-    grid-template-columns:
-        1fr auto;
-
+    grid-template-columns:1fr auto;
     align-items:center;
-
-    gap:10px;
-
-    padding:12px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    border-radius:15px;
-
-    background:
-        rgba(255,255,255,.035);
+    gap:8px;
+    padding:11px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    background:rgba(255,255,255,.03);
 }
 
-.shop-item b{
+.shop-item b,
+.shop-item span{
     display:block;
-
-    font-size:14px;
 }
 
 .shop-item span{
-    font-size:12px;
-
+    margin-top:3px;
     color:var(--muted);
+    font-size:11px;
 }
 
 .buy{
     border:0;
-
-    padding:9px 11px;
-
-    border-radius:12px;
-
-    background:#18233f;
-
+    border-radius:11px;
+    padding:9px;
     color:white;
-
-    cursor:pointer;
-
+    background:#192441;
     font-weight:800;
 }
 
-.buy:hover{
-    background:#223052;
-}
-
-/* =========================
-   MINI STATS
-========================= */
-
 .mini-grid{
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:8px;
 }
 
 .mini{
-    padding:11px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    border-radius:14px;
-
-    background:
-        rgba(255,255,255,.035);
+    padding:10px;
+    border-radius:13px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.03);
 }
 
 .mini span{
     display:block;
-
     color:var(--muted);
-
     font-size:11px;
-
-    margin-bottom:4px;
 }
 
 .mini b{
-    font-size:16px;
+    display:block;
+    margin-top:5px;
 }
 
-/* =========================
-   AUDIO
-========================= */
+.mission{
+    margin-bottom:9px;
+    padding:10px;
+    border-radius:13px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.03);
+}
 
-.volume-row{
+.mission.done{
+    border-color:rgba(97,255,141,.35);
+}
+
+.mission-top{
+    display:flex;
+    justify-content:space-between;
+    gap:5px;
+    margin-bottom:7px;
+    font-size:13px;
+}
+
+.leader-row{
     display:grid;
-
-    grid-template-columns:
-        auto 1fr auto;
-
-    gap:10px;
-
+    grid-template-columns:28px 1fr auto;
+    gap:8px;
     align-items:center;
-
-    margin-top:11px;
+    padding:8px 5px;
+    border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-input[type="range"]{
-    width:100%;
-
-    accent-color:
-        var(--green);
+.leader-row:last-child{
+    border-bottom:0;
 }
 
 /* =========================
-   TOAST
+   MODALS
 ========================= */
 
-.toast{
-    position:fixed;
-
-    left:50%;
-
-    bottom:24px;
-
-    transform:
-        translate(-50%,30px);
-
-    padding:12px 16px;
-
-    border-radius:14px;
-
-    background:#0d1630;
-
-    color:white;
-
-    border:
-        1px solid rgba(255,255,255,.14);
-
-    box-shadow:
-        0 18px 50px
-        rgba(0,0,0,.45);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.25s;
-
-    z-index:2000;
-
-    font-weight:700;
-
-    text-align:center;
-
-    max-width:
-        min(520px,90vw);
-}
-
-.toast.show{
-    opacity:1;
-
-    transform:
-        translate(-50%,0);
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal-backdrop{
-    position:fixed;
-
-    inset:0;
-
+.overlay{
     display:none;
-
+    position:fixed;
+    inset:0;
+    z-index:1000;
     place-items:center;
-
-    background:
-        rgba(2,5,14,.72);
-
-    backdrop-filter:
-        blur(8px);
-
-    z-index:1500;
-
     padding:20px;
+    background:rgba(2,4,12,.78);
+    backdrop-filter:blur(8px);
 }
 
-.modal-backdrop.open{
+.overlay.open{
     display:grid;
 }
 
 .modal{
-    width:
-        min(620px,95vw);
-
-    max-height:82vh;
-
+    width:min(620px,96vw);
+    max-height:85vh;
     overflow:auto;
-
-    background:#0a1125;
-
-    border:
-        1px solid rgba(255,255,255,.14);
-
-    border-radius:24px;
-
     padding:22px;
-
-    box-shadow:
-        0 30px 90px
-        rgba(0,0,0,.55);
-}
-
-.modal h2{
-    margin-top:0;
-}
-
-.modal p,
-.modal li{
-    color:#ccd4ea;
-
-    line-height:1.6;
-}
-
-.achievement-list{
-    display:grid;
-
-    gap:9px;
+    border:1px solid var(--line);
+    border-radius:24px;
+    background:#091024;
 }
 
 .achievement{
     display:flex;
-
-    justify-content:
-        space-between;
-
-    gap:12px;
-
-    padding:12px;
-
-    border-radius:14px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    background:
-        rgba(255,255,255,.035);
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:8px 0;
+    padding:11px;
+    border:1px solid var(--line);
+    border-radius:13px;
 }
 
 .achievement.locked{
-    opacity:.45;
-
-    filter:
-        grayscale(1);
+    opacity:.4;
 }
 
 /* =========================
    EFFECTS
 ========================= */
 
+.toast{
+    position:fixed;
+    z-index:3000;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,30px);
+    opacity:0;
+    max-width:90vw;
+    padding:12px 16px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:#0d1630;
+    font-weight:800;
+    transition:.25s;
+    pointer-events:none;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
 .particle{
     position:fixed;
-
-    top:-60px;
-
+    top:-50px;
+    z-index:2500;
     pointer-events:none;
-
-    z-index:1800;
-
-    animation:
-        fall linear forwards;
-
-    will-change:
-        transform,
-        opacity;
+    animation:fall linear forwards;
 }
 
 @keyframes fall{
     to{
-        transform:
-            translateY(115vh)
-            rotate(540deg);
-
-        opacity:.1;
+        transform:translateY(115vh) rotate(600deg);
+        opacity:0;
     }
 }
 
 .shake{
-    animation:
-        shake .32s ease;
+    animation:shake .32s;
 }
 
 @keyframes shake{
-    25%{
-        transform:
-            translateX(-8px);
-    }
-
-    50%{
-        transform:
-            translateX(8px);
-    }
-
-    75%{
-        transform:
-            translateX(-5px);
-    }
+    25%{transform:translateX(-7px)}
+    50%{transform:translateX(7px)}
+    75%{transform:translateX(-4px)}
 }
 
-.pulse{
-    animation:
-        pulse .8s ease 2;
+.win{
+    animation:win .75s ease 2;
 }
 
-@keyframes pulse{
+@keyframes win{
     50%{
-        transform:
-            scale(1.04);
-
-        text-shadow:
-            0 0 26px
-            rgba(92,255,134,.7);
+        transform:scale(1.04);
+        text-shadow:0 0 25px var(--green);
     }
 }
 
@@ -915,751 +651,531 @@ input[type="range"]{
 ========================= */
 
 @media(max-width:900px){
-
-    .stats{
-        grid-template-columns:
-            repeat(3,1fr);
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .side{
-        grid-template-columns:
-            1fr 1fr;
-    }
+    .grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(3,1fr)}
 }
 
-@media(max-width:650px){
-
-    .app{
-        width:
-            min(96%,560px);
-
-        padding-top:18px;
-    }
-
-    .hero{
-        align-items:flex-start;
-    }
-
-    .badge{
-        font-size:12px;
-    }
-
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .game-card{
-        padding:14px;
-    }
-
-    .play-zone{
-        padding:14px;
-    }
-
-    .guess-row{
-        grid-template-columns:1fr;
-    }
-
-    .primary{
-        min-height:52px;
-    }
-
-    .actions{
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .side{
-        grid-template-columns:1fr;
-    }
-
-    select{
-        width:100%;
-
-        min-width:0;
-    }
+@media(max-width:600px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .guess-row{grid-template-columns:1fr}
+    .primary{min-height:52px}
+    .actions{grid-template-columns:1fr 1fr}
+    .hero{align-items:flex-start}
+    .account-bar{align-items:flex-start}
+    .top-buttons{justify-content:flex-end}
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- ========================
+     ACCOUNT LOGIN
+======================== -->
 
-<header class="hero">
+<section id="authScreen">
 
-    <div class="brand">
+    <div class="auth-card">
 
-        <h1>
-            🎮 SUPER GAME НАЗАРА
-        </h1>
+        <div class="auth-logo">🎮</div>
 
-        <p>
-            ULTRA EDITION • вгадай число,
-            прокачуй рівень і бий рекорди
+        <h1>SUPER GAME</h1>
+
+        <p>Створи акаунт і зберігай свій прогрес</p>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" id="loginTab">
+                🔑 Вхід
+            </button>
+
+            <button class="auth-tab" id="registerTab">
+                🆕 Реєстрація
+            </button>
+        </div>
+
+        <form class="auth-form" id="loginForm">
+
+            <input
+                id="loginUsername"
+                placeholder="👤 Нікнейм"
+                autocomplete="username"
+                maxlength="16"
+                required
+            >
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="🔒 Пароль"
+                autocomplete="current-password"
+                required
+            >
+
+            <button class="auth-main">
+                🚀 УВІЙТИ В ГРУ
+            </button>
+
+        </form>
+
+        <form class="auth-form hidden" id="registerForm">
+
+            <input
+                id="registerUsername"
+                placeholder="👤 Нікнейм"
+                maxlength="16"
+                required
+            >
+
+            <input
+                id="registerPassword"
+                type="password"
+                placeholder="🔒 Пароль — мінімум 6 символів"
+                required
+            >
+
+            <input
+                id="registerPassword2"
+                type="password"
+                placeholder="🔒 Повтори пароль"
+                required
+            >
+
+            <button class="auth-main">
+                ✨ СТВОРИТИ АКАУНТ
+            </button>
+
+        </form>
+
+        <div id="authMessage"></div>
+
+        <p class="small">
+            🔐 Пароль не зберігається відкритим текстом.
+            Акаунт працює локально у цьому браузері.
         </p>
 
     </div>
 
-    <div class="badge">
-        ⚡ ULTRA
-    </div>
-
-</header>
-
-<section class="stats">
-
-    <div class="stat">
-        <div class="label">
-            ⏳ Час
-        </div>
-
-        <div class="value" id="timer">
-            0 c
-        </div>
-    </div>
-
-    <div class="stat">
-        <div class="label">
-            ⭐ Очки
-        </div>
-
-        <div class="value" id="score">
-            0
-        </div>
-    </div>
-
-    <div class="stat">
-        <div class="label">
-            ❤️ Життя
-        </div>
-
-        <div class="value" id="lives">
-            0
-        </div>
-    </div>
-
-    <div class="stat">
-        <div class="label">
-            🪙 Монети
-        </div>
-
-        <div class="value" id="coins">
-            0
-        </div>
-    </div>
-
-    <div class="stat">
-        <div class="label">
-            🔥 Серія
-        </div>
-
-        <div class="value" id="streak">
-            0
-        </div>
-    </div>
-
-    <div class="stat">
-        <div class="label">
-            🏅 Рівень
-        </div>
-
-        <div class="value" id="playerLevel">
-            1
-        </div>
-    </div>
-
 </section>
 
-<main class="grid">
+<!-- ========================
+     GAME
+======================== -->
 
-<section class="card game-card">
+<div id="gameApp" class="app hidden">
 
-    <div class="topline">
+    <div class="account-bar">
+
+        <div class="account-info">
+
+            <div class="avatar" id="avatar">N</div>
+
+            <div>
+                <div class="username" id="accountName">
+                    Player
+                </div>
+
+                <div class="rank" id="accountRank">
+                    🟢 Новачок
+                </div>
+            </div>
+
+        </div>
+
+        <div class="top-buttons">
+
+            <button class="btn green" id="dailyBtn">
+                🎁 Бонус дня
+            </button>
+
+            <button class="btn" id="leaderBtn">
+                🏆 Лідери
+            </button>
+
+            <button class="btn red" id="logoutBtn">
+                🚪 Вийти
+            </button>
+
+        </div>
+
+    </div>
+
+    <header class="hero">
 
         <div>
-
-            <b id="godStatus">
-                👑 GOD MODE: OFF
-            </b>
-
-            <br>
-
-            <span
-                class="small"
-                id="difficultyInfo"
-            >
-                Обери складність
-            </span>
-
+            <h1>🎮 SUPER GAME НАЗАРА</h1>
+            <p>ACCOUNT ULTRA EDITION</p>
         </div>
 
-        <select
-            id="difficulty"
-            aria-label="Складність"
-        >
-
-            <option value="easy">
-                😊 Легко — 1..50
-            </option>
-
-            <option
-                value="normal"
-                selected
-            >
-                😎 Середньо — 1..100
-            </option>
-
-            <option value="hard">
-                🔥 Складно — 1..500
-            </option>
-
-            <option value="crazy">
-                💀 Божевільно — 1..1000
-            </option>
-
-            <option value="impossible">
-                ☠️ Неможливо — 1..10000
-            </option>
-
-        </select>
-
-    </div>
-
-    <div class="xp-wrap">
-
-        <div class="xp-head">
-
-            <span>
-                ✨ XP
-            </span>
-
-            <span id="xpText">
-                0 / 100
-            </span>
-
+        <div class="ultra">
+            ⚡ ULTRA 3.0
         </div>
 
-        <div class="track">
+    </header>
 
-            <div
-                class="fill"
-                id="xpFill"
-            ></div>
+    <!-- STATS -->
 
+    <section class="stats">
+
+        <div class="stat">
+            <small>⏳ Час</small>
+            <b id="timer">0 c</b>
         </div>
 
-    </div>
-
-    <div
-        class="play-zone"
-        id="playZone"
-    >
-
-        <div
-            class="range"
-            id="rangeText"
-        >
-            🎯 Вгадай число від 1 до 100
+        <div class="stat">
+            <small>⭐ Очки</small>
+            <b id="score">0</b>
         </div>
 
-        <div class="guess-row">
-
-            <input
-                id="guess"
-                type="number"
-                min="1"
-                max="100"
-                inputmode="numeric"
-                autocomplete="off"
-                placeholder="Введи число…"
-            >
-
-            <button
-                class="primary"
-                id="checkBtn"
-            >
-                🎯 ПЕРЕВІРИТИ
-            </button>
-
+        <div class="stat">
+            <small>❤️ Життя</small>
+            <b id="lives">0</b>
         </div>
 
-        <div
-            class="result"
-            id="result"
-        >
-            Готовий? Починай! 🚀
+        <div class="stat">
+            <small>🪙 Монети</small>
+            <b id="coins">0</b>
         </div>
 
-        <div class="proximity">
+        <div class="stat">
+            <small>🔥 Серія</small>
+            <b id="streak">0</b>
+        </div>
 
-            <div class="xp-head">
+        <div class="stat">
+            <small>🏅 Рівень</small>
+            <b id="level">1</b>
+        </div>
 
-                <span>
-                    🌡️ Наскільки близько
-                </span>
+    </section>
 
-                <span id="heatText">
-                    0%
-                </span>
+    <main class="grid">
+
+        <!-- GAME CARD -->
+
+        <section class="card">
+
+            <div class="topline">
+
+                <div>
+                    <b id="godStatus">
+                        👑 GOD MODE: OFF
+                    </b>
+
+                    <br>
+
+                    <span class="small" id="difficultyInfo"></span>
+                </div>
+
+                <select id="difficulty">
+
+                    <option value="easy">
+                        😊 Легко — 50
+                    </option>
+
+                    <option value="normal">
+                        😎 Середньо — 100
+                    </option>
+
+                    <option value="hard">
+                        🔥 Складно — 500
+                    </option>
+
+                    <option value="crazy">
+                        💀 Божевільно — 1000
+                    </option>
+
+                    <option value="impossible">
+                        ☠️ НЕМОЖЛИВО — 10000
+                    </option>
+
+                </select>
 
             </div>
 
-            <div class="track">
+            <!-- XP -->
 
-                <div
-                    class="fill"
-                    id="heatFill"
-                ></div>
+            <div class="xp-area">
+
+                <div class="bar-head">
+                    <span>✨ XP</span>
+                    <span id="xpText">0 / 100</span>
+                </div>
+
+                <div class="track">
+                    <div class="fill" id="xpFill"></div>
+                </div>
 
             </div>
 
-        </div>
+            <!-- PLAY -->
 
-        <div class="actions">
+            <div class="play-zone" id="playZone">
 
-            <button
-                class="btn good"
-                id="newBtn"
-            >
-                🔄 Нова гра
-            </button>
+                <div id="rangeText">
+                    🎯 Вгадай число
+                </div>
 
-            <button
-                class="btn"
-                id="hintBtn"
-            >
-                💡 Підказка
-            </button>
+                <div class="guess-row">
 
-            <button
-                class="btn warn"
-                id="godBtn"
-            >
-                👑 GOD MODE
-            </button>
+                    <input
+                        id="guess"
+                        type="number"
+                        min="1"
+                        placeholder="Введи число..."
+                    >
 
-            <button
-                class="btn"
-                id="helpBtn"
-            >
-                ❓ Як грати
-            </button>
+                    <button class="primary" id="checkBtn">
+                        🎯 ПЕРЕВІРИТИ
+                    </button>
 
-            <button
-                class="btn"
-                id="achievementsBtn"
-            >
-                🏆 Досягнення
-            </button>
+                </div>
 
-            <button
-                class="btn danger"
-                id="resetBtn"
-            >
-                🧹 Скинути прогрес
-            </button>
+                <div id="result">
+                    Готовий? Починай! 🚀
+                </div>
 
-        </div>
+                <div>
 
-    </div>
+                    <div class="bar-head">
+                        <span>🌡️ Близькість</span>
+                        <span id="heatText">0%</span>
+                    </div>
 
-</section>
+                    <div class="track">
+                        <div class="fill" id="heatFill"></div>
+                    </div>
 
-<aside class="side">
+                </div>
 
-<section class="card">
+                <div class="actions">
 
-<h2 class="section-title">
+                    <button class="btn green" id="newBtn">
+                        🔄 Нова гра
+                    </button>
 
-    <span>
-        🛒 Магазин
-    </span>
+                    <button class="btn" id="hintBtn">
+                        💡 Підказка
+                    </button>
 
-    <span class="small">
-        купуй за монети
-    </span>
+                    <button class="btn yellow" id="godBtn">
+                        👑 GOD MODE
+                    </button>
 
-</h2>
+                    <button class="btn" id="achievementBtn">
+                        🏆 Досягнення
+                    </button>
 
-<div class="shop-grid">
+                    <button class="btn" id="musicBtn">
+                        ▶️ Музика
+                    </button>
 
-<div class="shop-item">
+                    <button class="btn red" id="resetBtn">
+                        🧹 Скинути
+                    </button>
 
-    <div>
+                </div>
 
-        <b>
-            ❤️ +1 життя
-        </b>
+            </div>
 
-        <span>
-            Додає одне життя
-        </span>
+        </section>
 
-    </div>
+        <!-- RIGHT -->
 
-    <button
-        class="buy"
-        data-buy="life"
-    >
-        50 🪙
-    </button>
+        <aside class="side">
 
-</div>
+            <!-- SHOP -->
 
-<div class="shop-item">
+            <section class="card">
 
-    <div>
+                <h2>🛒 Магазин</h2>
 
-        <b>
-            💡 Розумна підказка
-        </b>
+                <div class="shop">
 
-        <span>
-            Парне/непарне + половина діапазону
-        </span>
+                    <div class="shop-item">
 
-    </div>
+                        <div>
+                            <b>❤️ +1 життя</b>
+                            <span>Додаткове життя</span>
+                        </div>
 
-    <button
-        class="buy"
-        data-buy="hint"
-    >
-        30 🪙
-    </button>
+                        <button class="buy" data-buy="life">
+                            50 🪙
+                        </button>
 
-</div>
+                    </div>
 
-<div class="shop-item">
+                    <div class="shop-item">
 
-    <div>
+                        <div>
+                            <b>💡 PRO підказка</b>
+                            <span>Парне + половина</span>
+                        </div>
 
-        <b>
-            🛡️ Щит
-        </b>
+                        <button class="buy" data-buy="hint">
+                            30 🪙
+                        </button>
 
-        <span>
-            Одна помилка без втрати життя
-        </span>
+                    </div>
 
-    </div>
+                    <div class="shop-item">
 
-    <button
-        class="buy"
-        data-buy="shield"
-    >
-        80 🪙
-    </button>
+                        <div>
+                            <b>🛡️ Щит</b>
+                            <span>Рятує одне життя</span>
+                        </div>
 
-</div>
+                        <button class="buy" data-buy="shield">
+                            80 🪙
+                        </button>
 
-<div class="shop-item">
+                    </div>
 
-    <div>
+                    <div class="shop-item">
 
-        <b>
-            📡 Сканер
-        </b>
+                        <div>
+                            <b>📡 Сканер</b>
+                            <span>Звужує діапазон</span>
+                        </div>
 
-        <span>
-            Показує вузький діапазон
-        </span>
+                        <button class="buy" data-buy="scanner">
+                            120 🪙
+                        </button>
 
-    </div>
+                    </div>
 
-    <button
-        class="buy"
-        data-buy="scan"
-    >
-        120 🪙
-    </button>
+                    <div class="shop-item">
 
-</div>
+                        <div>
+                            <b>⚡ X2 нагорода</b>
+                            <span>Наступна перемога ×2</span>
+                        </div>
 
-</div>
+                        <button class="buy" data-buy="boost">
+                            180 🪙
+                        </button>
 
-</section>
+                    </div>
 
-<section class="card">
+                </div>
 
-<h2 class="section-title">
+            </section>
 
-    <span>
-        📊 Статистика
-    </span>
+            <!-- INVENTORY -->
 
-    <span
-        class="small"
-        id="achievementCount"
-    >
-        0/6
-    </span>
+            <section class="card">
 
-</h2>
+                <h2>🎒 Профіль</h2>
 
-<div class="mini-grid">
+                <div class="mini-grid">
 
-    <div class="mini">
+                    <div class="mini">
+                        <span>🏆 Перемоги</span>
+                        <b id="wins">0</b>
+                    </div>
 
-        <span>
-            🏆 Перемоги
-        </span>
+                    <div class="mini">
+                        <span>🎯 Спроби</span>
+                        <b id="attemptsTotal">0</b>
+                    </div>
 
-        <b id="wins">
-            0
-        </b>
+                    <div class="mini">
+                        <span>⚡ Краща серія</span>
+                        <b id="bestStreak">0</b>
+                    </div>
 
-    </div>
+                    <div class="mini">
+                        <span>⏱️ Рекорд</span>
+                        <b id="bestTime">—</b>
+                    </div>
 
-    <div class="mini">
+                    <div class="mini">
+                        <span>🛡️ Щити</span>
+                        <b id="shields">0</b>
+                    </div>
 
-        <span>
-            🎯 Спроб
-        </span>
+                    <div class="mini">
+                        <span>⚡ X2</span>
+                        <b id="boosts">0</b>
+                    </div>
 
-        <b id="totalAttempts">
-            0
-        </b>
+                </div>
 
-    </div>
+            </section>
 
-    <div class="mini">
+            <!-- MISSIONS -->
 
-        <span>
-            ⚡ Краща серія
-        </span>
+            <section class="card">
 
-        <b id="bestStreak">
-            0
-        </b>
+                <h2>📋 Місії дня</h2>
 
-    </div>
+                <div id="missions"></div>
 
-    <div class="mini">
+            </section>
 
-        <span>
-            ⏱️ Рекорд
-        </span>
+        </aside>
 
-        <b id="bestTime">
-            —
-        </b>
-
-    </div>
-
-    <div class="mini">
-
-        <span>
-            🛡️ Щити
-        </span>
-
-        <b id="shields">
-            0
-        </b>
-
-    </div>
-
-    <div class="mini">
-
-        <span>
-            🏅 Найвищий рівень
-        </span>
-
-        <b id="levelMini">
-            1
-        </b>
-
-    </div>
-
-</div>
-
-</section>
-
-<section class="card">
-
-<h2 class="section-title">
-
-    <span>
-        🎵 Звук
-    </span>
-
-    <span
-        class="small"
-        id="musicStatus"
-    >
-        OFF
-    </span>
-
-</h2>
-
-<button
-    class="btn good"
-    id="musicBtn"
-    style="width:100%"
->
-    ▶️ Увімкнути музику
-</button>
-
-<div class="volume-row">
-
-    <span>
-        🔈
-    </span>
-
-    <input
-        id="volume"
-        type="range"
-        min="0"
-        max="1"
-        step="0.05"
-        value="0.45"
-    >
-
-    <span>
-        🔊
-    </span>
-
-</div>
-
-<div
-    class="small"
-    style="margin-top:8px"
->
-    Використовується файл
-    <b>music.mp3</b>
-</div>
-
-</section>
-
-</aside>
-
-</main>
+    </main>
 
 </div>
 
 <audio
-    id="bgMusic"
+    id="music"
     src="music.mp3"
     loop
-    preload="auto"
 ></audio>
 
-<div
-    class="toast"
-    id="toast"
-></div>
-
-<!-- HELP -->
-
-<div
-    class="modal-backdrop"
-    id="helpModal"
->
-
-<div class="modal">
-
-<h2>
-    ❓ Як грати
-</h2>
-
-<p>
-    Комп'ютер загадує число.
-    Вводь варіанти — гра підкаже,
-    число більше чи менше.
-</p>
-
-<ul>
-
-<li>
-    🔥 Чим ближче до числа,
-    тим вищий відсоток.
-</li>
-
-<li>
-    ❤️ Помилка забирає життя.
-</li>
-
-<li>
-    🛡️ Щит рятує одне життя.
-</li>
-
-<li>
-    ⭐ Перемога дає очки,
-    монети та XP.
-</li>
-
-<li>
-    🔥 Серія перемог
-    збільшує нагороду.
-</li>
-
-<li>
-    🛒 Монети можна витрачати
-    в магазині.
-</li>
-
-<li>
-    👑 GOD MODE дає
-    999 життів.
-</li>
-
-</ul>
-
-<button
-    class="btn good"
-    data-close="helpModal"
->
-    ✅ Зрозуміло
-</button>
-
-</div>
-
-</div>
+<div class="toast" id="toast"></div>
 
 <!-- ACHIEVEMENTS -->
 
-<div
-    class="modal-backdrop"
-    id="achievementsModal"
->
+<div class="overlay" id="achievementModal">
 
-<div class="modal">
+    <div class="modal">
 
-<h2>
-    🏆 Досягнення
-</h2>
+        <h2>🏆 Досягнення</h2>
 
-<div
-    class="achievement-list"
-    id="achievementList"
-></div>
+        <div id="achievementList"></div>
 
-<div style="margin-top:14px">
+        <br>
 
-<button
-    class="btn good"
-    data-close="achievementsModal"
->
-    ✅ Закрити
-</button>
+        <button class="btn green" data-close="achievementModal">
+            ✅ Закрити
+        </button>
+
+    </div>
 
 </div>
 
-</div>
+<!-- LEADERBOARD -->
+
+<div class="overlay" id="leaderModal">
+
+    <div class="modal">
+
+        <h2>🏆 Локальна таблиця лідерів</h2>
+
+        <p class="small">
+            Рейтинг акаунтів, створених у цьому браузері.
+        </p>
+
+        <div id="leaderList"></div>
+
+        <br>
+
+        <button class="btn green" data-close="leaderModal">
+            ✅ Закрити
+        </button>
+
+    </div>
 
 </div>
 
 <script>
 "use strict";
 
-/* =========================
-   SETTINGS
-========================= */
+/* =====================================
+   CONFIG
+===================================== */
 
 const DIFFICULTIES = {
 
@@ -1668,7 +1184,7 @@ const DIFFICULTIES = {
         max:50,
         lives:10,
         score:70,
-        coins:18,
+        coins:20,
         xp:35
     },
 
@@ -1677,7 +1193,7 @@ const DIFFICULTIES = {
         max:100,
         lives:9,
         score:100,
-        coins:25,
+        coins:30,
         xp:50
     },
 
@@ -1685,8 +1201,8 @@ const DIFFICULTIES = {
         label:"🔥 Складно",
         max:500,
         lives:8,
-        score:160,
-        coins:38,
+        score:180,
+        coins:45,
         xp:70
     },
 
@@ -1694,18 +1210,18 @@ const DIFFICULTIES = {
         label:"💀 Божевільно",
         max:1000,
         lives:7,
-        score:230,
-        coins:55,
-        xp:90
+        score:260,
+        coins:65,
+        xp:95
     },
 
     impossible:{
-        label:"☠️ Неможливо",
+        label:"☠️ НЕМОЖЛИВО",
         max:10000,
         lives:6,
-        score:400,
-        coins:90,
-        xp:130
+        score:500,
+        coins:120,
+        xp:150
     }
 
 };
@@ -1713,253 +1229,921 @@ const DIFFICULTIES = {
 const ACHIEVEMENTS = [
 
     {
-        id:"first_win",
+        id:"first",
         icon:"🥇",
         name:"Перша перемога",
-        desc:"Виграй одну гру."
+        text:"Виграй першу гру"
     },
 
     {
-        id:"five_wins",
+        id:"wins5",
         icon:"🏆",
-        name:"Серйозний гравець",
-        desc:"Здобудь 5 перемог."
+        name:"Переможець",
+        text:"Виграй 5 разів"
+    },
+
+    {
+        id:"wins20",
+        icon:"👑",
+        name:"Чемпіон",
+        text:"Виграй 20 разів"
     },
 
     {
         id:"streak3",
         icon:"🔥",
-        name:"На хвилі",
-        desc:"Зроби серію з 3 перемог."
+        name:"Серія",
+        text:"3 перемоги поспіль"
     },
 
     {
         id:"level5",
         icon:"🏅",
-        name:"Прокачаний",
-        desc:"Досягни 5 рівня."
+        name:"PRO",
+        text:"Досягни 5 рівня"
     },
 
     {
         id:"rich",
         icon:"💰",
         name:"Багатій",
-        desc:"Назбирай 500 монет."
+        text:"Май 500 монет"
     },
 
     {
-        id:"fast",
-        icon:"⚡",
-        name:"Блискавка",
-        desc:"Виграй менш ніж за 10 секунд."
+        id:"score1000",
+        icon:"⭐",
+        name:"1000 очок",
+        text:"Набери 1000 очок"
+    },
+
+    {
+        id:"impossible",
+        icon:"☠️",
+        name:"НЕМОЖЛИВО?",
+        text:"Переможи на складності 10000"
     }
 
 ];
 
-/* =========================
-   ELEMENTS
-========================= */
+const MISSIONS = [
 
-const $ =
-id =>
+    {
+        id:"guess10",
+        name:"🎯 Зроби 10 спроб",
+        reward:40
+    },
+
+    {
+        id:"win2",
+        name:"🏆 Виграй 2 гри",
+        reward:80
+    },
+
+    {
+        id:"hard",
+        name:"🔥 Переможи на HARD+",
+        reward:120
+    }
+
+];
+
+const $ = id =>
 document.getElementById(id);
 
-const els = {
+/* =====================================
+   ACCOUNT DATABASE
+===================================== */
 
-    timer:$("timer"),
+const ACCOUNTS_KEY =
+    "nazar_game_accounts_v3";
 
-    score:$("score"),
+const SESSION_KEY =
+    "nazar_game_session_v3";
 
-    lives:$("lives"),
+let accounts =
+    loadAccounts();
 
-    coins:$("coins"),
-
-    streak:$("streak"),
-
-    playerLevel:
-        $("playerLevel"),
-
-    xpText:
-        $("xpText"),
-
-    xpFill:
-        $("xpFill"),
-
-    result:
-        $("result"),
-
-    difficulty:
-        $("difficulty"),
-
-    difficultyInfo:
-        $("difficultyInfo"),
-
-    rangeText:
-        $("rangeText"),
-
-    guess:
-        $("guess"),
-
-    heatFill:
-        $("heatFill"),
-
-    heatText:
-        $("heatText"),
-
-    wins:
-        $("wins"),
-
-    totalAttempts:
-        $("totalAttempts"),
-
-    bestStreak:
-        $("bestStreak"),
-
-    bestTime:
-        $("bestTime"),
-
-    shields:
-        $("shields"),
-
-    levelMini:
-        $("levelMini"),
-
-    godStatus:
-        $("godStatus"),
-
-    achievementCount:
-        $("achievementCount"),
-
-    achievementList:
-        $("achievementList"),
-
-    bgMusic:
-        $("bgMusic"),
-
-    musicStatus:
-        $("musicStatus"),
-
-    musicBtn:
-        $("musicBtn"),
-
-    volume:
-        $("volume"),
-
-    toast:
-        $("toast"),
-
-    playZone:
-        $("playZone")
-
-};
-
-/* =========================
-   SAVE
-========================= */
-
-const defaults = {
-
-    score:0,
-
-    coins:0,
-
-    xp:0,
-
-    level:1,
-
-    wins:0,
-
-    streak:0,
-
-    bestStreak:0,
-
-    totalAttempts:0,
-
-    bestTime:null,
-
-    shields:0,
-
-    achievements:[],
-
-    difficulty:"normal"
-
-};
+let currentKey =
+    null;
 
 let profile =
-loadProfile();
+    null;
 
-let secret = 1;
-
-let attempts = 0;
-
-let lives = 0;
-
-let gameOver = false;
-
-let startTime =
-Date.now();
-
-let timerId = null;
-
-let godMode = false;
-
-let audioCtx = null;
-
-function loadProfile(){
+function loadAccounts(){
 
     try{
 
-        const data =
-        JSON.parse(
+        return JSON.parse(
             localStorage.getItem(
-                "nazarUltraSave"
-            ) || "{}"
+                ACCOUNTS_KEY
+            )
+            ||
+            "{}"
         );
-
-        return {
-
-            ...defaults,
-
-            ...data,
-
-            achievements:
-                Array.isArray(
-                    data.achievements
-                )
-                ? data.achievements
-                : []
-
-        };
 
     }
 
     catch{
 
-        return {
-            ...defaults,
-            achievements:[]
-        };
+        return {};
 
     }
 
 }
 
-function saveProfile(){
+function saveAccounts(){
 
     localStorage.setItem(
-        "nazarUltraSave",
-        JSON.stringify(profile)
+        ACCOUNTS_KEY,
+        JSON.stringify(accounts)
     );
 
 }
 
-/* =========================
-   HELPERS
-========================= */
+function defaultProfile(){
 
-function currentDiff(){
+    return{
 
-    return(
+        score:0,
+        coins:100,
+
+        xp:0,
+        level:1,
+
+        wins:0,
+
+        streak:0,
+        bestStreak:0,
+
+        totalAttempts:0,
+        bestTime:null,
+
+        shields:0,
+        boosts:0,
+
+        achievements:[],
+
+        difficulty:"normal",
+
+        daily:{
+
+            date:"",
+            attempts:0,
+            wins:0,
+            hardWin:false,
+
+            missionClaims:{},
+
+            lastBonus:"",
+            bonusStreak:0
+
+        }
+
+    };
+
+}
+
+function normalizeProfile(data){
+
+    const base =
+        defaultProfile();
+
+    const result = {
+
+        ...base,
+        ...(data || {}),
+
+        achievements:
+            Array.isArray(
+                data?.achievements
+            )
+            ?
+            data.achievements
+            :
+            [],
+
+        daily:{
+
+            ...base.daily,
+            ...(data?.daily || {}),
+
+            missionClaims:{
+                ...(data?.daily?.missionClaims || {})
+            }
+
+        }
+
+    };
+
+    return result;
+
+}
+
+function usernameKey(name){
+
+    return name
+        .trim()
+        .toLocaleLowerCase(
+            "uk-UA"
+        );
+
+}
+
+/* =====================================
+   PASSWORD HASH
+===================================== */
+
+function randomSalt(){
+
+    if(
+        window.crypto
+        &&
+        crypto.getRandomValues
+    ){
+
+        const arr =
+            new Uint32Array(4);
+
+        crypto.getRandomValues(
+            arr
+        );
+
+        return Array.from(arr)
+            .join("-");
+    }
+
+    return (
+        Date.now()
+        +
+        "-"
+        +
+        Math.random()
+    );
+
+}
+
+function simpleHash(text){
+
+    let hash =
+        2166136261;
+
+    for(
+        let i=0;
+        i<text.length;
+        i++
+    ){
+
+        hash ^=
+            text.charCodeAt(i);
+
+        hash =
+            Math.imul(
+                hash,
+                16777619
+            );
+
+    }
+
+    return (
+        hash >>> 0
+    )
+    .toString(16);
+
+}
+
+async function passwordHash(
+    password,
+    salt
+){
+
+    const text =
+        salt
+        +
+        "|"
+        +
+        password;
+
+    if(
+        window.crypto
+        &&
+        crypto.subtle
+    ){
+
+        const buffer =
+            await crypto.subtle.digest(
+                "SHA-256",
+                new TextEncoder()
+                    .encode(text)
+            );
+
+        return (
+            "sha256:"
+            +
+            Array
+                .from(
+                    new Uint8Array(buffer)
+                )
+                .map(
+                    b =>
+                    b
+                    .toString(16)
+                    .padStart(2,"0")
+                )
+                .join("")
+        );
+
+    }
+
+    return (
+        "local:"
+        +
+        simpleHash(text)
+    );
+
+}
+
+/* =====================================
+   AUTH UI
+===================================== */
+
+function authMessage(
+    text,
+    error=false
+){
+
+    const box =
+        $("authMessage");
+
+    box.textContent =
+        text;
+
+    box.style.color =
+        error
+        ?
+        "#ff7c8d"
+        :
+        "#68ff93";
+
+}
+
+function authMode(mode){
+
+    const login =
+        mode === "login";
+
+    $("loginForm")
+        .classList
+        .toggle(
+            "hidden",
+            !login
+        );
+
+    $("registerForm")
+        .classList
+        .toggle(
+            "hidden",
+            login
+        );
+
+    $("loginTab")
+        .classList
+        .toggle(
+            "active",
+            login
+        );
+
+    $("registerTab")
+        .classList
+        .toggle(
+            "active",
+            !login
+        );
+
+    authMessage("");
+
+}
+
+$("loginTab")
+.addEventListener(
+    "click",
+    ()=>authMode("login")
+);
+
+$("registerTab")
+.addEventListener(
+    "click",
+    ()=>authMode("register")
+);
+
+/* =====================================
+   REGISTER
+===================================== */
+
+$("registerForm")
+.addEventListener(
+    "submit",
+    async e=>{
+
+        e.preventDefault();
+
+        const username =
+            $("registerUsername")
+            .value
+            .trim();
+
+        const password =
+            $("registerPassword")
+            .value;
+
+        const password2 =
+            $("registerPassword2")
+            .value;
+
+        if(
+            !/^[a-zA-Zа-яА-ЯіІїЇєЄґҐ0-9_]{3,16}$/
+            .test(username)
+        ){
+
+            authMessage(
+                "❌ Нік: 3–16 символів, літери, цифри або _",
+                true
+            );
+
+            return;
+
+        }
+
+        if(
+            password.length < 6
+        ){
+
+            authMessage(
+                "❌ Пароль має бути мінімум 6 символів",
+                true
+            );
+
+            return;
+
+        }
+
+        if(
+            password !== password2
+        ){
+
+            authMessage(
+                "❌ Паролі не співпадають",
+                true
+            );
+
+            return;
+
+        }
+
+        const key =
+            usernameKey(username);
+
+        if(accounts[key]){
+
+            authMessage(
+                "❌ Такий акаунт вже існує",
+                true
+            );
+
+            return;
+
+        }
+
+        const salt =
+            randomSalt();
+
+        const hash =
+            await passwordHash(
+                password,
+                salt
+            );
+
+        let newProfile =
+            defaultProfile();
+
+        /*
+          Якщо це перший акаунт —
+          переносимо старий прогрес
+          SUPER GAME.
+        */
+
+        if(
+            Object.keys(accounts)
+            .length === 0
+        ){
+
+            try{
+
+                const legacy =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "nazarUltraSave"
+                        )
+                        ||
+                        "null"
+                    );
+
+                if(legacy){
+
+                    newProfile =
+                        normalizeProfile({
+                            ...newProfile,
+                            ...legacy
+                        });
+
+                }
+
+            }
+
+            catch{}
+
+        }
+
+        accounts[key] = {
+
+            username,
+            salt,
+            passwordHash:hash,
+
+            createdAt:
+                new Date()
+                .toISOString(),
+
+            profile:
+                newProfile
+
+        };
+
+        saveAccounts();
+
+        authMessage(
+            "✅ Акаунт створено!"
+        );
+
+        await loginAccount(
+            key
+        );
+
+    }
+);
+
+/* =====================================
+   LOGIN
+===================================== */
+
+$("loginForm")
+.addEventListener(
+    "submit",
+    async e=>{
+
+        e.preventDefault();
+
+        const username =
+            $("loginUsername")
+            .value
+            .trim();
+
+        const password =
+            $("loginPassword")
+            .value;
+
+        const key =
+            usernameKey(username);
+
+        const account =
+            accounts[key];
+
+        if(!account){
+
+            authMessage(
+                "❌ Акаунт не знайдено",
+                true
+            );
+
+            return;
+
+        }
+
+        const hash =
+            await passwordHash(
+                password,
+                account.salt
+            );
+
+        if(
+            hash
+            !==
+            account.passwordHash
+        ){
+
+            authMessage(
+                "❌ Неправильний пароль",
+                true
+            );
+
+            return;
+
+        }
+
+        await loginAccount(
+            key
+        );
+
+    }
+);
+
+async function loginAccount(key){
+
+    currentKey =
+        key;
+
+    localStorage.setItem(
+        SESSION_KEY,
+        key
+    );
+
+    profile =
+        normalizeProfile(
+            accounts[key].profile
+        );
+
+    accounts[key].profile =
+        profile;
+
+    prepareDaily();
+
+    saveProfile();
+
+    $("authScreen")
+        .classList
+        .add("hidden");
+
+    $("gameApp")
+        .classList
+        .remove("hidden");
+
+    updateAccountUI();
+
+    newGame();
+
+    toast(
+        "🎮 Вітаю, "
+        +
+        accounts[key].username
+        +
+        "!"
+    );
+
+}
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+$("logoutBtn")
+.addEventListener(
+    "click",
+    logout
+);
+
+function logout(){
+
+    clearInterval(
+        timerId
+    );
+
+    $("music").pause();
+
+    localStorage.removeItem(
+        SESSION_KEY
+    );
+
+    currentKey =
+        null;
+
+    profile =
+        null;
+
+    $("gameApp")
+        .classList
+        .add("hidden");
+
+    $("authScreen")
+        .classList
+        .remove("hidden");
+
+    $("loginPassword").value =
+        "";
+
+    authMode("login");
+
+}
+
+/* =====================================
+   SAVE PROFILE
+===================================== */
+
+function saveProfile(){
+
+    if(
+        !currentKey
+        ||
+        !profile
+    ){
+
+        return;
+
+    }
+
+    accounts[currentKey].profile =
+        profile;
+
+    saveAccounts();
+
+}
+
+/* =====================================
+   DAILY SYSTEM
+===================================== */
+
+function dateKey(date=new Date()){
+
+    const y =
+        date.getFullYear();
+
+    const m =
+        String(
+            date.getMonth()+1
+        )
+        .padStart(2,"0");
+
+    const d =
+        String(
+            date.getDate()
+        )
+        .padStart(2,"0");
+
+    return `${y}-${m}-${d}`;
+
+}
+
+function yesterdayKey(){
+
+    const d =
+        new Date();
+
+    d.setDate(
+        d.getDate()-1
+    );
+
+    return dateKey(d);
+
+}
+
+function prepareDaily(){
+
+    const today =
+        dateKey();
+
+    if(
+        profile.daily.date
+        !==
+        today
+    ){
+
+        profile.daily.date =
+            today;
+
+        profile.daily.attempts =
+            0;
+
+        profile.daily.wins =
+            0;
+
+        profile.daily.hardWin =
+            false;
+
+        profile.daily.missionClaims =
+            {};
+
+    }
+
+}
+
+/* =====================================
+   DAILY BONUS
+===================================== */
+
+$("dailyBtn")
+.addEventListener(
+    "click",
+    claimDaily
+);
+
+function claimDaily(){
+
+    const today =
+        dateKey();
+
+    if(
+        profile.daily.lastBonus
+        ===
+        today
+    ){
+
+        toast(
+            "✅ Сьогодні бонус уже отримано"
+        );
+
+        return;
+
+    }
+
+    if(
+        profile.daily.lastBonus
+        ===
+        yesterdayKey()
+    ){
+
+        profile.daily.bonusStreak++;
+
+    }
+
+    else{
+
+        profile.daily.bonusStreak =
+            1;
+
+    }
+
+    const reward =
+        50
+        +
+        Math.min(
+            profile.daily.bonusStreak,
+            10
+        )
+        *
+        10;
+
+    profile.coins +=
+        reward;
+
+    addXP(
+        25
+    );
+
+    profile.daily.lastBonus =
+        today;
+
+    saveProfile();
+
+    render();
+
+    confetti(25);
+
+    toast(
+        `🎁 +${reward} монет! Серія входів: ${profile.daily.bonusStreak}`
+    );
+
+}
+
+/* =====================================
+   GAME DATA
+===================================== */
+
+let secret =
+    1;
+
+let lives =
+    0;
+
+let attempts =
+    0;
+
+let gameOver =
+    false;
+
+let godMode =
+    false;
+
+let freeHintUsed =
+    false;
+
+let startTime =
+    Date.now();
+
+let timerId =
+    null;
+
+function diff(){
+
+    return (
         DIFFICULTIES[
             profile.difficulty
         ]
@@ -1971,135 +2155,215 @@ function currentDiff(){
 
 function xpNeeded(){
 
-    return(
-        100 +
-        (profile.level - 1)
-        * 60
+    return (
+        100
+        +
+        (
+            profile.level-1
+        )
+        *
+        60
     );
 
 }
 
-/* =========================
+/* =====================================
+   ACCOUNT UI
+===================================== */
+
+function getRank(){
+
+    if(profile.level >= 20)
+        return "👑 ЛЕГЕНДА";
+
+    if(profile.level >= 12)
+        return "💎 MASTER";
+
+    if(profile.level >= 7)
+        return "🔥 PRO";
+
+    if(profile.level >= 3)
+        return "⚡ Гравець";
+
+    return "🟢 Новачок";
+
+}
+
+function updateAccountUI(){
+
+    const name =
+        accounts[currentKey]
+        .username;
+
+    $("accountName")
+        .textContent =
+        name;
+
+    $("avatar")
+        .textContent =
+        name
+        .charAt(0)
+        .toUpperCase();
+
+    $("accountRank")
+        .textContent =
+        getRank();
+
+}
+
+/* =====================================
    RENDER
-========================= */
+===================================== */
 
 function render(){
 
-    els.score.textContent =
+    if(!profile)
+        return;
+
+    $("score").textContent =
         profile.score
         .toLocaleString("uk-UA");
 
-    els.lives.textContent =
-        godMode
-        ? "999 👑"
-        : lives;
-
-    els.coins.textContent =
+    $("coins").textContent =
         profile.coins
         .toLocaleString("uk-UA");
 
-    els.streak.textContent =
+    $("lives").textContent =
+        godMode
+        ?
+        "999 👑"
+        :
+        lives;
+
+    $("streak").textContent =
         profile.streak;
 
-    els.playerLevel.textContent =
+    $("level").textContent =
         profile.level;
 
-    els.wins.textContent =
+    $("wins").textContent =
         profile.wins;
 
-    els.totalAttempts.textContent =
+    $("attemptsTotal").textContent =
         profile.totalAttempts;
 
-    els.bestStreak.textContent =
+    $("bestStreak").textContent =
         profile.bestStreak;
 
-    els.bestTime.textContent =
+    $("bestTime").textContent =
         profile.bestTime == null
-        ? "—"
-        : profile.bestTime + " c";
+        ?
+        "—"
+        :
+        profile.bestTime
+        +
+        " c";
 
-    els.shields.textContent =
+    $("shields").textContent =
         profile.shields;
 
-    els.levelMini.textContent =
-        profile.level;
+    $("boosts").textContent =
+        profile.boosts;
 
-    const need =
+    const needed =
         xpNeeded();
 
-    els.xpText.textContent =
-        `${profile.xp} / ${need}`;
+    $("xpText").textContent =
+        `${profile.xp} / ${needed}`;
 
-    els.xpFill.style.width =
+    $("xpFill").style.width =
         Math.min(
             100,
-            (
-                profile.xp /
-                need
-            ) * 100
+            profile.xp
+            /
+            needed
+            *
+            100
         )
-        + "%";
+        +
+        "%";
 
     const d =
-        currentDiff();
+        diff();
 
-    els.rangeText.textContent =
+    $("rangeText").textContent =
         `🎯 Вгадай число від 1 до ${d.max}`;
 
-    els.difficultyInfo.textContent =
+    $("difficultyInfo").textContent =
         `${d.label} • ${d.lives} життів • ${d.score}⭐`;
 
-    els.guess.max =
-        d.max;
-
-    els.difficulty.value =
+    $("difficulty").value =
         profile.difficulty;
 
-    els.godStatus.textContent =
+    $("guess").max =
+        d.max;
+
+    $("godStatus").textContent =
         godMode
-        ? "👑 GOD MODE: ON"
-        : "👑 GOD MODE: OFF";
+        ?
+        "👑 GOD MODE: ON"
+        :
+        "👑 GOD MODE: OFF";
 
     $("godBtn")
-    .classList
-    .toggle(
-        "active",
-        godMode
-    );
+        .classList
+        .toggle(
+            "active",
+            godMode
+        );
 
-    els.achievementCount.textContent =
-        `${profile.achievements.length}/${ACHIEVEMENTS.length}`;
+    $("dailyBtn").textContent =
+        profile.daily.lastBonus
+        ===
+        dateKey()
+        ?
+        "✅ Бонус отримано"
+        :
+        "🎁 Бонус дня";
+
+    updateAccountUI();
+
+    renderMissions();
 
     renderAchievements();
 
 }
 
-/* =========================
+/* =====================================
    NEW GAME
-========================= */
+===================================== */
 
 function newGame(
     message="Готовий? Починай! 🚀"
 ){
 
     const d =
-        currentDiff();
+        diff();
 
     secret =
         Math.floor(
             Math.random()
-            * d.max
+            *
+            d.max
         )
-        + 1;
-
-    attempts = 0;
-
-    gameOver = false;
+        +
+        1;
 
     lives =
         godMode
-        ? 999
-        : d.lives;
+        ?
+        999
+        :
+        d.lives;
+
+    attempts =
+        0;
+
+    freeHintUsed =
+        false;
+
+    gameOver =
+        false;
 
     startTime =
         Date.now();
@@ -2108,85 +2372,79 @@ function newGame(
         timerId
     );
 
-    els.timer.textContent =
+    $("timer").textContent =
         "0 c";
 
     timerId =
-    setInterval(()=>{
+        setInterval(()=>{
 
-        if(!gameOver){
+            if(!gameOver){
 
-            els.timer.textContent =
-                Math.floor(
-                    (
-                        Date.now()
-                        -
-                        startTime
+                $("timer").textContent =
+                    Math.floor(
+                        (
+                            Date.now()
+                            -
+                            startTime
+                        )
+                        /
+                        1000
                     )
-                    /
-                    1000
-                )
-                +
-                " c";
+                    +
+                    " c";
 
-        }
+            }
 
-    },250);
+        },300);
 
-    els.result.textContent =
+    $("guess").value =
+        "";
+
+    $("result").textContent =
         message;
 
-    els.result.classList
-        .remove("pulse");
-
-    els.guess.value =
-        "";
+    $("result")
+        .classList
+        .remove("win");
 
     setHeat(0);
 
     render();
 
     setTimeout(
-        ()=>
-        els.guess.focus(),
+        ()=>$("guess").focus(),
         50
     );
 
 }
 
-/* =========================
-   HEAT
-========================= */
+/* =====================================
+   CHECK GUESS
+===================================== */
 
-function setHeat(percent){
+$("checkBtn")
+.addEventListener(
+    "click",
+    checkGuess
+);
 
-    const p =
-        Math.max(
-            0,
-            Math.min(
-                100,
-                Math.round(percent)
-            )
-        );
+$("guess")
+.addEventListener(
+    "keydown",
+    e=>{
 
-    els.heatFill.style.width =
-        p + "%";
+        if(e.key === "Enter")
+            checkGuess();
 
-    els.heatText.textContent =
-        p + "%";
-
-}
-
-/* =========================
-   CHECK
-========================= */
+    }
+);
 
 function checkGuess(){
 
     if(gameOver){
 
         toast(
-            "🔄 Натисни «Нова гра»"
+            "🔄 Почни нову гру"
         );
 
         return;
@@ -2194,25 +2452,23 @@ function checkGuess(){
     }
 
     const d =
-        currentDiff();
+        diff();
 
-    const user =
+    const value =
         Number(
-            els.guess.value
+            $("guess").value
         );
 
     if(
-        !Number.isInteger(user)
+        !Number.isInteger(value)
         ||
-        user < 1
+        value < 1
         ||
-        user > d.max
+        value > d.max
     ){
 
-        els.result.textContent =
+        $("result").textContent =
             `⚠️ Введи число від 1 до ${d.max}`;
-
-        sound("error");
 
         return;
 
@@ -2222,31 +2478,36 @@ function checkGuess(){
 
     profile.totalAttempts++;
 
-    const diff =
+    profile.daily.attempts++;
+
+    const distance =
         Math.abs(
-            secret - user
+            secret-value
         );
 
     const heat =
-        secret === user
-        ? 100
-        : Math.max(
+        secret === value
+        ?
+        100
+        :
+        Math.max(
             1,
-            100 -
-            (
-                diff /
-                d.max
-            )
-            * 115
+            100
+            -
+            distance
+            /
+            d.max
+            *
+            120
         );
 
     setHeat(
         heat
     );
 
-    if(
-        user === secret
-    ){
+    checkMissions();
+
+    if(value === secret){
 
         winGame();
 
@@ -2256,9 +2517,7 @@ function checkGuess(){
 
     if(!godMode){
 
-        if(
-            profile.shields > 0
-        ){
+        if(profile.shields > 0){
 
             profile.shields--;
 
@@ -2277,9 +2536,9 @@ function checkGuess(){
     }
 
     if(
-        lives <= 0
-        &&
         !godMode
+        &&
+        lives <= 0
     ){
 
         loseGame();
@@ -2288,82 +2547,63 @@ function checkGuess(){
 
     }
 
-    let hot;
+    let text;
 
-    if(heat >= 92){
+    if(heat >= 93)
+        text="🔥🔥 МАЙЖЕ!";
 
-        hot =
-            "🔥 ДУЖЕ ГАРЯЧЕ!";
+    else if(heat >= 80)
+        text="🔥 Дуже гаряче";
 
-    }
+    else if(heat >= 60)
+        text="🌡️ Тепло";
 
-    else if(heat >= 78){
+    else if(heat >= 35)
+        text="❄️ Холодно";
 
-        hot =
-            "🌡️ ДУЖЕ БЛИЗЬКО!";
-
-    }
-
-    else if(heat >= 55){
-
-        hot =
-            "🙂 ТЕПЛО";
-
-    }
-
-    else if(heat >= 30){
-
-        hot =
-            "❄️ ХОЛОДНО";
-
-    }
-
-    else{
-
-        hot =
-            "🥶 ДУЖЕ ХОЛОДНО";
-
-    }
+    else
+        text="🥶 Дуже холодно";
 
     const direction =
-        user < secret
-        ? "⬆️ БІЛЬШЕ"
-        : "⬇️ МЕНШЕ";
+        value < secret
+        ?
+        "⬆️ БІЛЬШЕ"
+        :
+        "⬇️ МЕНШЕ";
 
-    els.result.innerHTML =
-        `${hot}<br>${direction}`;
+    $("result").innerHTML =
+        `${text}<br>${direction}`;
 
-    els.playZone.classList
+    $("playZone")
+        .classList
         .remove("shake");
 
-    void
-    els.playZone.offsetWidth;
+    void $("playZone")
+        .offsetWidth;
 
-    els.playZone.classList
+    $("playZone")
+        .classList
         .add("shake");
 
-    els.guess.value =
+    $("guess").value =
         "";
-
-    sound(
-        "wrong"
-    );
 
     saveProfile();
 
     render();
 
-    els.guess.focus();
+    $("guess").focus();
 
 }
 
-/* =========================
+/* =====================================
    WIN
-========================= */
+===================================== */
 
 function winGame(){
 
-    gameOver = true;
+    gameOver =
+        true;
 
     clearInterval(
         timerId
@@ -2384,7 +2624,26 @@ function winGame(){
         );
 
     const d =
-        currentDiff();
+        diff();
+
+    if(godMode){
+
+        $("result").innerHTML =
+            `👑 GOD ПЕРЕМОГА!
+            <br>🎯 ${secret}
+            <br>🧠 ${attempts} спроб
+            <br>⏳ ${seconds} c
+            <br><span class="small">
+            GOD MODE не дає нагород
+            </span>`;
+
+        setHeat(100);
+
+        confetti(25);
+
+        return;
+
+    }
 
     profile.streak++;
 
@@ -2394,16 +2653,30 @@ function winGame(){
             profile.streak
         );
 
-    const multiplier =
+    let multiplier =
+        1
+        +
         Math.min(
-            2.5,
-            1 +
-            (
-                profile.streak - 1
-            )
-            *
-            .15
-        );
+            profile.streak-1,
+            10
+        )
+        *
+        .1;
+
+    let boostText =
+        "";
+
+    if(profile.boosts > 0){
+
+        multiplier *=
+            2;
+
+        profile.boosts--;
+
+        boostText =
+            " ⚡X2";
+
+    }
 
     const scoreReward =
         Math.round(
@@ -2419,70 +2692,61 @@ function winGame(){
             multiplier
         );
 
-    if(!godMode){
+    profile.score +=
+        scoreReward;
 
-        profile.score +=
-            scoreReward;
+    profile.coins +=
+        coinReward;
 
-        profile.coins +=
-            coinReward;
+    profile.wins++;
 
-        profile.wins++;
+    profile.daily.wins++;
 
-        addXP(
-            d.xp
-        );
+    if(
+        profile.difficulty === "hard"
+        ||
+        profile.difficulty === "crazy"
+        ||
+        profile.difficulty === "impossible"
+    ){
 
-        if(
-            profile.bestTime == null
-            ||
-            seconds <
-            profile.bestTime
-        ){
-
-            profile.bestTime =
-                seconds;
-
-        }
+        profile.daily.hardWin =
+            true;
 
     }
 
-    if(godMode){
+    if(
+        profile.bestTime == null
+        ||
+        seconds
+        <
+        profile.bestTime
+    ){
 
-        els.result.innerHTML =
-            `👑 GOD ПЕРЕМОГА!
-            <br>
-            🎯 Число: ${secret}
-            <br>
-            🧠 Спроб: ${attempts}
-            <br>
-            ⏳ ${seconds} c
-            <br>
-            <span style="font-size:14px;color:#aab4d0">
-            У GOD MODE нагороди не зберігаються
-            </span>`;
+        profile.bestTime =
+            seconds;
 
     }
 
-    else{
+    addXP(
+        d.xp
+    );
 
-        els.result.innerHTML =
-            `🔥 ПЕРЕМОГА!
-            <br>
-            🎯 Число: ${secret}
-            <br>
-            🧠 Спроб: ${attempts}
-            <br>
-            ⏳ ${seconds} c
-            <br>
-            +${scoreReward} ⭐
-            &nbsp;
-            +${coinReward} 🪙`;
+    checkAchievements();
 
-    }
+    checkMissions();
 
-    els.result.classList
-        .add("pulse");
+    $("result").innerHTML =
+        `🔥 ПЕРЕМОГА!${boostText}
+        <br>🎯 Число: ${secret}
+        <br>🧠 Спроб: ${attempts}
+        <br>⏳ ${seconds} c
+        <br>⭐ +${scoreReward}
+        &nbsp; 🪙 +${coinReward}`;
+
+    $("result")
+        .classList
+        .add("win");
 
     setHeat(
         100
@@ -2492,43 +2756,32 @@ function winGame(){
         40
     );
 
-    sound(
-        "win"
-    );
-
-    checkAchievements(
-        seconds
-    );
-
     saveProfile();
 
     render();
 
 }
 
-/* =========================
+/* =====================================
    LOSE
-========================= */
+===================================== */
 
 function loseGame(){
 
-    gameOver = true;
+    gameOver =
+        true;
 
     clearInterval(
         timerId
     );
 
-    profile.streak = 0;
+    profile.streak =
+        0;
 
-    els.result.innerHTML =
+    $("result").innerHTML =
         `💀 GAME OVER
-        <br>
-        Число було:
+        <br>🎯 Число було:
         <b>${secret}</b>`;
-
-    sound(
-        "lose"
-    );
 
     saveProfile();
 
@@ -2536,17 +2789,41 @@ function loseGame(){
 
 }
 
-/* =========================
-   LEVEL
-========================= */
+/* =====================================
+   HEAT
+===================================== */
+
+function setHeat(value){
+
+    const p =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                Math.round(value)
+            )
+        );
+
+    $("heatFill").style.width =
+        p
+        +
+        "%";
+
+    $("heatText").textContent =
+        p
+        +
+        "%";
+
+}
+
+/* =====================================
+   XP
+===================================== */
 
 function addXP(amount){
 
     profile.xp +=
         amount;
-
-    let leveled =
-        false;
 
     while(
         profile.xp
@@ -2554,50 +2831,115 @@ function addXP(amount){
         xpNeeded()
     ){
 
-        const required =
+        const needed =
             xpNeeded();
 
         profile.xp -=
-            required;
+            needed;
 
         profile.level++;
 
         profile.coins +=
-            50;
-
-        leveled =
-            true;
-
-    }
-
-    if(leveled){
+            75;
 
         toast(
-            `🏅 НОВИЙ РІВЕНЬ ${profile.level}! +50 🪙`
+            `🏅 РІВЕНЬ ${profile.level}! +75 🪙`
         );
 
         confetti(
-            25
+            20
         );
 
     }
 
 }
 
-/* =========================
+/* =====================================
+   NEW GAME BUTTON
+===================================== */
+
+$("newBtn")
+.addEventListener(
+    "click",
+    ()=>newGame()
+);
+
+/* =====================================
+   FREE HINT
+===================================== */
+
+$("hintBtn")
+.addEventListener(
+    "click",
+    ()=>{
+
+        if(gameOver){
+
+            toast(
+                "🔄 Почни нову гру"
+            );
+
+            return;
+
+        }
+
+        if(freeHintUsed){
+
+            toast(
+                "💡 Безкоштовну підказку вже використано"
+            );
+
+            return;
+
+        }
+
+        freeHintUsed =
+            true;
+
+        const d =
+            diff();
+
+        const quarter =
+            Math.min(
+                4,
+                Math.ceil(
+                    secret
+                    /
+                    Math.ceil(
+                        d.max/4
+                    )
+                )
+            );
+
+        $("result").textContent =
+            `💡 Число у ${quarter}-й чверті діапазону`;
+
+    }
+);
+
+/* =====================================
    SHOP
-========================= */
+===================================== */
+
+document
+.querySelectorAll("[data-buy]")
+.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>buy(
+            button.dataset.buy
+        )
+    );
+
+});
 
 function buy(type){
 
-    if(
-        gameOver
-        &&
-        type === "life"
-    ){
+    if(godMode){
 
         toast(
-            "🔄 Почни нову гру"
+            "👑 Магазин вимкнений у GOD MODE"
         );
 
         return;
@@ -2607,12 +2949,10 @@ function buy(type){
     const prices = {
 
         life:50,
-
         hint:30,
-
         shield:80,
-
-        scan:120
+        scanner:120,
+        boost:180
 
     };
 
@@ -2620,16 +2960,13 @@ function buy(type){
         prices[type];
 
     if(
-        profile.coins <
+        profile.coins
+        <
         price
     ){
 
         toast(
             "❌ Недостатньо монет"
-        );
-
-        sound(
-            "error"
         );
 
         return;
@@ -2639,9 +2976,7 @@ function buy(type){
     profile.coins -=
         price;
 
-    if(
-        type === "life"
-    ){
+    if(type === "life"){
 
         lives++;
 
@@ -2651,17 +2986,31 @@ function buy(type){
 
     }
 
-    else if(
-        type === "hint"
-    ){
+    if(type === "hint"){
 
-        smartHint();
+        const half =
+            Math.floor(
+                diff().max/2
+            );
+
+        $("result").textContent =
+            `💡 Число ${
+                secret%2===0
+                ?
+                "парне"
+                :
+                "непарне"
+            } і воно ${
+                secret<=half
+                ?
+                "у нижній"
+                :
+                "у верхній"
+            } половині`;
 
     }
 
-    else if(
-        type === "shield"
-    ){
+    if(type === "shield"){
 
         profile.shields++;
 
@@ -2671,18 +3020,13 @@ function buy(type){
 
     }
 
-    else if(
-        type === "scan"
-    ){
-
-        const d =
-            currentDiff();
+    if(type === "scanner"){
 
         const radius =
             Math.max(
                 2,
                 Math.ceil(
-                    d.max
+                    diff().max
                     *
                     .04
                 )
@@ -2691,22 +3035,26 @@ function buy(type){
         const low =
             Math.max(
                 1,
-                secret -
-                radius
+                secret-radius
             );
 
         const high =
             Math.min(
-                d.max,
-                secret +
-                radius
+                diff().max,
+                secret+radius
             );
 
-        els.result.textContent =
-            `📡 Сканер: число між ${low} і ${high}`;
+        $("result").textContent =
+            `📡 Сканер: ${low} — ${high}`;
+
+    }
+
+    if(type === "boost"){
+
+        profile.boosts++;
 
         toast(
-            "📡 Сканування завершено"
+            "⚡ X2 нагорода активна!"
         );
 
     }
@@ -2715,216 +3063,138 @@ function buy(type){
 
     render();
 
-    sound(
-        "buy"
-    );
-
 }
 
-/* =========================
-   HINTS
-========================= */
+/* =====================================
+   GOD MODE
+===================================== */
 
-function smartHint(){
+$("godBtn")
+.addEventListener(
+    "click",
+    ()=>{
 
-    const d =
-        currentDiff();
+        godMode =
+            !godMode;
 
-    const half =
-        Math.floor(
-            d.max / 2
+        if(godMode){
+
+            lives =
+                999;
+
+            toast(
+                "👑 GOD MODE ON"
+            );
+
+            confetti(
+                20
+            );
+
+        }
+
+        else{
+
+            toast(
+                "👑 GOD MODE OFF"
+            );
+
+            newGame(
+                "Звичайний режим ✅"
+            );
+
+        }
+
+        render();
+
+    }
+);
+
+/* =====================================
+   DIFFICULTY
+===================================== */
+
+$("difficulty")
+.addEventListener(
+    "change",
+    ()=>{
+
+        profile.difficulty =
+            $("difficulty").value;
+
+        saveProfile();
+
+        newGame(
+            "🎯 Складність змінено!"
         );
 
-    const parity =
-        secret % 2 === 0
-        ? "парне"
-        : "непарне";
+    }
+);
 
-    const side =
-        secret <= half
-        ?
-        `у нижній половині 1–${half}`
-        :
-        `у верхній половині ${half + 1}–${d.max}`;
+/* =====================================
+   ACHIEVEMENTS
+===================================== */
 
-    els.result.textContent =
-        `💡 Число ${parity} і знаходиться ${side}.`;
+function unlock(id){
 
-}
-
-function freeHint(){
-
-    if(gameOver){
-
-        toast(
-            "🔄 Почни нову гру"
-        );
+    if(
+        profile.achievements
+        .includes(id)
+    ){
 
         return;
 
     }
 
-    const d =
-        currentDiff();
+    profile.achievements
+        .push(id);
 
-    const q =
-        Math.ceil(
-            d.max / 4
+    const item =
+        ACHIEVEMENTS
+        .find(
+            a=>a.id===id
         );
 
-    const quarter =
-        Math.min(
-            4,
-            Math.ceil(
-                secret / q
-            )
-        );
+    toast(
+        `🏆 ${item.name}`
+    );
 
-    els.result.textContent =
-        `💡 Число знаходиться у ${quarter}-й чверті діапазону.`;
-
-    sound(
-        "hint"
+    confetti(
+        15
     );
 
 }
 
-/* =========================
-   GOD MODE
-========================= */
+function checkAchievements(){
 
-function toggleGod(){
+    if(profile.wins >= 1)
+        unlock("first");
 
-    godMode =
-        !godMode;
+    if(profile.wins >= 5)
+        unlock("wins5");
 
-    if(godMode){
+    if(profile.wins >= 20)
+        unlock("wins20");
 
-        lives = 999;
+    if(profile.streak >= 3)
+        unlock("streak3");
 
-        toast(
-            "👑 GOD MODE АКТИВОВАНО"
-        );
+    if(profile.level >= 5)
+        unlock("level5");
 
-        confetti(
-            20
-        );
+    if(profile.coins >= 500)
+        unlock("rich");
 
-    }
-
-    else{
-
-        toast(
-            "👑 GOD MODE ВИМКНЕНО"
-        );
-
-        newGame(
-            "Звичайний режим повернено ✅"
-        );
-
-    }
-
-    render();
-
-    sound(
-        "god"
-    );
-
-}
-
-/* =========================
-   ACHIEVEMENTS
-========================= */
-
-function checkAchievements(seconds){
-
-    function unlock(id){
-
-        if(
-            !profile.achievements
-            .includes(id)
-        ){
-
-            profile.achievements
-            .push(id);
-
-            const a =
-                ACHIEVEMENTS
-                .find(
-                    item =>
-                    item.id === id
-                );
-
-            if(a){
-
-                toast(
-                    `🏆 Досягнення: ${a.name}`
-                );
-
-            }
-
-        }
-
-    }
+    if(profile.score >= 1000)
+        unlock("score1000");
 
     if(
-        profile.wins >= 1
+        profile.difficulty
+        ===
+        "impossible"
     ){
 
         unlock(
-            "first_win"
-        );
-
-    }
-
-    if(
-        profile.wins >= 5
-    ){
-
-        unlock(
-            "five_wins"
-        );
-
-    }
-
-    if(
-        profile.streak >= 3
-    ){
-
-        unlock(
-            "streak3"
-        );
-
-    }
-
-    if(
-        profile.level >= 5
-    ){
-
-        unlock(
-            "level5"
-        );
-
-    }
-
-    if(
-        profile.coins >= 500
-    ){
-
-        unlock(
-            "rich"
-        );
-
-    }
-
-    if(
-        seconds < 10
-        &&
-        !godMode
-    ){
-
-        unlock(
-            "fast"
+            "impossible"
         );
 
     }
@@ -2933,57 +3203,568 @@ function checkAchievements(seconds){
 
 function renderAchievements(){
 
-    els.achievementList.innerHTML =
-        ACHIEVEMENTS
-        .map(a=>{
+    const box =
+        $("achievementList");
 
-            const unlocked =
-                profile.achievements
-                .includes(a.id);
+    box.innerHTML =
+        "";
 
-            return`
+    ACHIEVEMENTS
+    .forEach(a=>{
 
-            <div class="
-                achievement
-                ${unlocked ? "" : "locked"}
-            ">
+        const unlocked =
+            profile.achievements
+            .includes(a.id);
 
-                <div>
+        const row =
+            document
+            .createElement("div");
 
-                    <b>
-                        ${a.icon}
-                        ${a.name}
-                    </b>
+        row.className =
+            "achievement "
+            +
+            (
+                unlocked
+                ?
+                ""
+                :
+                "locked"
+            );
 
-                    <div class="small">
-                        ${a.desc}
-                    </div>
+        const info =
+            document
+            .createElement("div");
 
-                </div>
+        const name =
+            document
+            .createElement("b");
 
-                <b>
-                    ${unlocked ? "✅" : "🔒"}
-                </b>
+        name.textContent =
+            `${a.icon} ${a.name}`;
 
-            </div>
+        const text =
+            document
+            .createElement("div");
 
-            `;
+        text.className =
+            "small";
 
-        })
-        .join("");
+        text.textContent =
+            a.text;
+
+        info.append(
+            name,
+            text
+        );
+
+        const status =
+            document
+            .createElement("b");
+
+        status.textContent =
+            unlocked
+            ?
+            "✅"
+            :
+            "🔒";
+
+        row.append(
+            info,
+            status
+        );
+
+        box.appendChild(
+            row
+        );
+
+    });
 
 }
 
-/* =========================
+$("achievementBtn")
+.addEventListener(
+    "click",
+    ()=>openModal(
+        "achievementModal"
+    )
+);
+
+/* =====================================
+   DAILY MISSIONS
+===================================== */
+
+function checkMissions(){
+
+    const d =
+        profile.daily;
+
+    if(
+        d.attempts >= 10
+        &&
+        !d.missionClaims.guess10
+    ){
+
+        d.missionClaims.guess10 =
+            true;
+
+        profile.coins +=
+            40;
+
+        toast(
+            "📋 Місія виконана! +40 🪙"
+        );
+
+    }
+
+    if(
+        d.wins >= 2
+        &&
+        !d.missionClaims.win2
+    ){
+
+        d.missionClaims.win2 =
+            true;
+
+        profile.coins +=
+            80;
+
+        toast(
+            "🏆 Місія виконана! +80 🪙"
+        );
+
+    }
+
+    if(
+        d.hardWin
+        &&
+        !d.missionClaims.hard
+    ){
+
+        d.missionClaims.hard =
+            true;
+
+        profile.coins +=
+            120;
+
+        toast(
+            "🔥 HARD місія! +120 🪙"
+        );
+
+    }
+
+}
+
+function renderMissions(){
+
+    const box =
+        $("missions");
+
+    box.innerHTML =
+        "";
+
+    const daily =
+        profile.daily;
+
+    const data = [
+
+        {
+            id:"guess10",
+            name:"🎯 Зроби 10 спроб",
+            value:daily.attempts,
+            max:10,
+            reward:40
+        },
+
+        {
+            id:"win2",
+            name:"🏆 Виграй 2 гри",
+            value:daily.wins,
+            max:2,
+            reward:80
+        },
+
+        {
+            id:"hard",
+            name:"🔥 Переможи HARD+",
+            value:
+                daily.hardWin
+                ?
+                1
+                :
+                0,
+            max:1,
+            reward:120
+        }
+
+    ];
+
+    data.forEach(m=>{
+
+        const claimed =
+            !!daily
+            .missionClaims[m.id];
+
+        const progress =
+            Math.min(
+                100,
+                m.value
+                /
+                m.max
+                *
+                100
+            );
+
+        const item =
+            document
+            .createElement("div");
+
+        item.className =
+            "mission "
+            +
+            (
+                claimed
+                ?
+                "done"
+                :
+                ""
+            );
+
+        const top =
+            document
+            .createElement("div");
+
+        top.className =
+            "mission-top";
+
+        const left =
+            document
+            .createElement("b");
+
+        left.textContent =
+            m.name;
+
+        const right =
+            document
+            .createElement("span");
+
+        right.textContent =
+            claimed
+            ?
+            "✅"
+            :
+            `${m.value}/${m.max} • ${m.reward}🪙`;
+
+        top.append(
+            left,
+            right
+        );
+
+        const track =
+            document
+            .createElement("div");
+
+        track.className =
+            "track";
+
+        const fill =
+            document
+            .createElement("div");
+
+        fill.className =
+            "fill";
+
+        fill.style.width =
+            progress
+            +
+            "%";
+
+        track.appendChild(
+            fill
+        );
+
+        item.append(
+            top,
+            track
+        );
+
+        box.appendChild(
+            item
+        );
+
+    });
+
+}
+
+/* =====================================
+   LOCAL LEADERBOARD
+===================================== */
+
+$("leaderBtn")
+.addEventListener(
+    "click",
+    ()=>{
+
+        renderLeaderboard();
+
+        openModal(
+            "leaderModal"
+        );
+
+    }
+);
+
+function renderLeaderboard(){
+
+    saveProfile();
+
+    const list =
+        $("leaderList");
+
+    list.innerHTML =
+        "";
+
+    const ranking =
+        Object
+        .values(accounts)
+        .sort(
+            (a,b)=>
+            (
+                b.profile?.score || 0
+            )
+            -
+            (
+                a.profile?.score || 0
+            )
+        )
+        .slice(0,10);
+
+    ranking.forEach(
+        (account,index)=>{
+
+            const row =
+                document
+                .createElement("div");
+
+            row.className =
+                "leader-row";
+
+            const place =
+                document
+                .createElement("b");
+
+            place.textContent =
+                index===0
+                ?
+                "🥇"
+                :
+                index===1
+                ?
+                "🥈"
+                :
+                index===2
+                ?
+                "🥉"
+                :
+                `${index+1}.`;
+
+            const name =
+                document
+                .createElement("b");
+
+            name.textContent =
+                account.username;
+
+            const score =
+                document
+                .createElement("span");
+
+            score.textContent =
+                `${account.profile?.score || 0} ⭐`;
+
+            row.append(
+                place,
+                name,
+                score
+            );
+
+            list.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+/* =====================================
+   MUSIC
+===================================== */
+
+$("music")
+    .volume =
+    .4;
+
+$("musicBtn")
+.addEventListener(
+    "click",
+    async ()=>{
+
+        const music =
+            $("music");
+
+        if(music.paused){
+
+            try{
+
+                await music.play();
+
+                $("musicBtn").textContent =
+                    "⏸️ Музика";
+
+                $("musicBtn")
+                    .classList
+                    .add("active");
+
+            }
+
+            catch{
+
+                toast(
+                    "⚠️ Не знайдено music.mp3"
+                );
+
+            }
+
+        }
+
+        else{
+
+            music.pause();
+
+            $("musicBtn").textContent =
+                "▶️ Музика";
+
+            $("musicBtn")
+                .classList
+                .remove("active");
+
+        }
+
+    }
+);
+
+/* =====================================
+   RESET PROFILE
+===================================== */
+
+$("resetBtn")
+.addEventListener(
+    "click",
+    ()=>{
+
+        if(
+            !confirm(
+                "Скинути прогрес цього акаунта?"
+            )
+        ){
+
+            return;
+
+        }
+
+        profile =
+            defaultProfile();
+
+        accounts[currentKey].profile =
+            profile;
+
+        godMode =
+            false;
+
+        saveProfile();
+
+        prepareDaily();
+
+        newGame();
+
+        toast(
+            "🧹 Прогрес скинуто"
+        );
+
+    }
+);
+
+/* =====================================
+   MODALS
+===================================== */
+
+function openModal(id){
+
+    $(id)
+        .classList
+        .add("open");
+
+}
+
+function closeModal(id){
+
+    $(id)
+        .classList
+        .remove("open");
+
+}
+
+document
+.querySelectorAll("[data-close]")
+.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>closeModal(
+            button.dataset.close
+        )
+    );
+
+});
+
+document
+.querySelectorAll(".overlay")
+.forEach(overlay=>{
+
+    overlay.addEventListener(
+        "click",
+        e=>{
+
+            if(
+                e.target
+                ===
+                overlay
+            ){
+
+                overlay
+                .classList
+                .remove("open");
+
+            }
+
+        }
+    );
+
+});
+
+/* =====================================
    TOAST
-========================= */
+===================================== */
 
 function toast(text){
 
-    els.toast.textContent =
+    const t =
+        $("toast");
+
+    t.textContent =
         text;
 
-    els.toast.classList
+    t.classList
         .add("show");
 
     clearTimeout(
@@ -2991,42 +3772,39 @@ function toast(text){
     );
 
     toast.timer =
-    setTimeout(()=>{
-
-        els.toast.classList
-            .remove("show");
-
-    },2300);
+        setTimeout(
+            ()=>t.classList
+                .remove("show"),
+            2400
+        );
 
 }
 
-/* =========================
+/* =====================================
    PARTICLES
-========================= */
+===================================== */
 
 function confetti(count=20){
 
     const icons = [
-        "✨",
-        "⭐",
         "🔥",
+        "⭐",
+        "✨",
         "💎",
+        "🪙",
         "⚡",
-        "👑",
-        "🪙"
+        "👑"
     ];
 
     for(
-        let i = 0;
-        i < count;
+        let i=0;
+        i<count;
         i++
     ){
 
         const p =
             document
-            .createElement(
-                "div"
-            );
+            .createElement("div");
 
         p.className =
             "particle";
@@ -3049,29 +3827,22 @@ function confetti(count=20){
 
         p.style.fontSize =
             (
-                18 +
+                17
+                +
                 Math.random()
                 *
-                24
+                27
             )
             +
             "px";
 
         p.style.animationDuration =
             (
-                2.2 +
+                2
+                +
                 Math.random()
                 *
-                2.8
-            )
-            +
-            "s";
-
-        p.style.animationDelay =
-            (
-                Math.random()
-                *
-                .35
+                3
             )
             +
             "s";
@@ -3079,601 +3850,74 @@ function confetti(count=20){
         document.body
             .appendChild(p);
 
-        setTimeout(()=>{
-
-            p.remove();
-
-        },5500);
-
-    }
-
-}
-
-/* =========================
-   SOUND EFFECTS
-========================= */
-
-function ensureAudio(){
-
-    if(!audioCtx){
-
-        const AudioClass =
-            window.AudioContext
-            ||
-            window.webkitAudioContext;
-
-        if(AudioClass){
-
-            audioCtx =
-                new AudioClass();
-
-        }
-
-    }
-
-    if(
-        audioCtx
-        &&
-        audioCtx.state
-        ===
-        "suspended"
-    ){
-
-        audioCtx.resume();
-
-    }
-
-}
-
-function tone(
-    frequency,
-    duration=.08,
-    type="sine",
-    volume=.035,
-    delay=0
-){
-
-    if(!audioCtx){
-
-        return;
-
-    }
-
-    const oscillator =
-        audioCtx
-        .createOscillator();
-
-    const gain =
-        audioCtx
-        .createGain();
-
-    oscillator.type =
-        type;
-
-    oscillator.frequency.value =
-        frequency;
-
-    gain.gain.value =
-        volume;
-
-    oscillator.connect(
-        gain
-    );
-
-    gain.connect(
-        audioCtx.destination
-    );
-
-    const time =
-        audioCtx.currentTime
-        +
-        delay;
-
-    gain.gain
-        .setValueAtTime(
-            volume,
-            time
-        );
-
-    gain.gain
-        .exponentialRampToValueAtTime(
-            .0001,
-            time +
-            duration
-        );
-
-    oscillator.start(
-        time
-    );
-
-    oscillator.stop(
-        time +
-        duration
-    );
-
-}
-
-function sound(kind){
-
-    ensureAudio();
-
-    if(!audioCtx){
-
-        return;
-
-    }
-
-    if(kind === "win"){
-
-        tone(
-            523,
-            .12,
-            "sine",
-            .05
-        );
-
-        tone(
-            659,
-            .12,
-            "sine",
-            .05,
-            .12
-        );
-
-        tone(
-            784,
-            .20,
-            "sine",
-            .05,
-            .24
-        );
-
-    }
-
-    else if(
-        kind === "wrong"
-    ){
-
-        tone(
-            180,
-            .12,
-            "square",
-            .025
-        );
-
-    }
-
-    else if(
-        kind === "lose"
-    ){
-
-        tone(
-            220,
-            .16,
-            "sawtooth",
-            .035
-        );
-
-        tone(
-            150,
-            .28,
-            "sawtooth",
-            .03,
-            .16
-        );
-
-    }
-
-    else if(
-        kind === "buy"
-    ){
-
-        tone(
-            700,
-            .08,
-            "sine",
-            .03
-        );
-
-        tone(
-            900,
-            .10,
-            "sine",
-            .03,
-            .08
-        );
-
-    }
-
-    else if(
-        kind === "god"
-    ){
-
-        tone(
-            330,
-            .08,
-            "triangle",
-            .04
-        );
-
-        tone(
-            660,
-            .20,
-            "triangle",
-            .04,
-            .08
-        );
-
-    }
-
-    else if(
-        kind === "hint"
-    ){
-
-        tone(
-            440,
-            .08,
-            "sine",
-            .025
-        );
-
-        tone(
-            600,
-            .12,
-            "sine",
-            .025,
-            .08
-        );
-
-    }
-
-    else if(
-        kind === "error"
-    ){
-
-        tone(
-            120,
-            .13,
-            "square",
-            .02
+        setTimeout(
+            ()=>p.remove(),
+            5500
         );
 
     }
 
 }
 
-/* =========================
-   MUSIC
-========================= */
-
-async function toggleMusic(){
-
-    try{
-
-        els.bgMusic.volume =
-            Number(
-                els.volume.value
-            );
-
-        if(
-            els.bgMusic.paused
-        ){
-
-            await
-            els.bgMusic.play();
-
-            els.musicStatus.textContent =
-                "ON";
-
-            els.musicBtn.textContent =
-                "⏸️ Вимкнути музику";
-
-            els.musicBtn.classList
-                .add("active");
-
-        }
-
-        else{
-
-            els.bgMusic.pause();
-
-            els.musicStatus.textContent =
-                "OFF";
-
-            els.musicBtn.textContent =
-                "▶️ Увімкнути музику";
-
-            els.musicBtn.classList
-                .remove("active");
-
-        }
-
-    }
-
-    catch{
-
-        toast(
-            "⚠️ Натисни кнопку музики ще раз"
-        );
-
-    }
-
-}
-
-/* =========================
-   MODALS
-========================= */
-
-function openModal(id){
-
-    $(id)
-    .classList
-    .add("open");
-
-}
-
-function closeModal(id){
-
-    $(id)
-    .classList
-    .remove("open");
-
-}
-
-/* =========================
-   EVENTS
-========================= */
-
-$("checkBtn")
-.addEventListener(
-    "click",
-    checkGuess
-);
-
-$("newBtn")
-.addEventListener(
-    "click",
-    ()=>{
-        newGame();
-    }
-);
-
-$("hintBtn")
-.addEventListener(
-    "click",
-    freeHint
-);
-
-$("godBtn")
-.addEventListener(
-    "click",
-    toggleGod
-);
-
-$("helpBtn")
-.addEventListener(
-    "click",
-    ()=>{
-        openModal(
-            "helpModal"
-        );
-    }
-);
-
-$("achievementsBtn")
-.addEventListener(
-    "click",
-    ()=>{
-        openModal(
-            "achievementsModal"
-        );
-    }
-);
-
-$("musicBtn")
-.addEventListener(
-    "click",
-    toggleMusic
-);
-
-els.guess
-.addEventListener(
-    "keydown",
-    e=>{
-
-        if(
-            e.key === "Enter"
-        ){
-
-            checkGuess();
-
-        }
-
-    }
-);
-
-els.volume
-.addEventListener(
-    "input",
-    ()=>{
-
-        els.bgMusic.volume =
-            Number(
-                els.volume.value
-            );
-
-    }
-);
-
-els.difficulty
-.addEventListener(
-    "change",
-    ()=>{
-
-        profile.difficulty =
-            els.difficulty.value;
-
-        saveProfile();
-
-        newGame(
-            "Складність змінено! 🎯"
-        );
-
-    }
-);
-
-/* SHOP */
-
-document
-.querySelectorAll(
-    "[data-buy]"
-)
-.forEach(btn=>{
-
-    btn.addEventListener(
-        "click",
-        ()=>{
-
-            buy(
-                btn.dataset.buy
-            );
-
-        }
-    );
-
-});
-
-/* CLOSE MODALS */
-
-document
-.querySelectorAll(
-    "[data-close]"
-)
-.forEach(btn=>{
-
-    btn.addEventListener(
-        "click",
-        ()=>{
-
-            closeModal(
-                btn.dataset.close
-            );
-
-        }
-    );
-
-});
-
-/* CLICK OUTSIDE */
-
-document
-.querySelectorAll(
-    ".modal-backdrop"
-)
-.forEach(modal=>{
-
-    modal.addEventListener(
-        "click",
-        e=>{
-
-            if(
-                e.target === modal
-            ){
-
-                modal.classList
-                    .remove("open");
-
-            }
-
-        }
-    );
-
-});
-
-/* =========================
-   RESET
-========================= */
-
-$("resetBtn")
-.addEventListener(
-    "click",
-    ()=>{
-
-        const yes =
-        confirm(
-            "Скинути ВСІ очки, монети, рівень, рекорди та досягнення?"
-        );
-
-        if(!yes){
-
-            return;
-
-        }
-
-        localStorage
-        .removeItem(
-            "nazarUltraSave"
-        );
-
-        profile = {
-
-            ...defaults,
-
-            achievements:[]
-
-        };
-
-        godMode =
-            false;
-
-        toast(
-            "🧹 Прогрес скинуто"
-        );
-
-        newGame();
-
-    }
-);
-
-/* ESC */
+/* =====================================
+   ESC
+===================================== */
 
 document
 .addEventListener(
     "keydown",
     e=>{
 
-        if(
-            e.key === "Escape"
-        ){
+        if(e.key === "Escape"){
 
             document
             .querySelectorAll(
-                ".modal-backdrop.open"
+                ".overlay.open"
             )
-            .forEach(modal=>{
-
-                modal.classList
-                .remove("open");
-
-            });
+            .forEach(
+                modal=>
+                modal
+                .classList
+                .remove("open")
+            );
 
         }
 
     }
 );
 
-/* =========================
-   START
-========================= */
+/* =====================================
+   AUTO LOGIN
+===================================== */
 
-els.bgMusic.volume =
-    Number(
-        els.volume.value
-    );
+async function start(){
 
-newGame();
+    const session =
+        localStorage.getItem(
+            SESSION_KEY
+        );
 
-render();
+    if(
+        session
+        &&
+        accounts[session]
+    ){
+
+        await loginAccount(
+            session
+        );
+
+        return;
+
+    }
+
+    $("authScreen")
+        .classList
+        .remove("hidden");
+
+}
+
+start();
 
 </script>
 
